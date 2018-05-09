@@ -21,7 +21,4 @@ public:
 
 };
 
-class yolo {};
-
-
-#endif // TIME-MANAGER_H
+#endif // TIME_MANAGER_H
