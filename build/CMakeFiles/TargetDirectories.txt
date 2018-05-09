@@ -1,6 +1,0 @@
-/home/jasper/repositories/Build-environment/modules/TIME/build/CMakeFiles/rebuild_cache.dir
-/home/jasper/repositories/Build-environment/modules/TIME/build/CMakeFiles/edit_cache.dir
-/home/jasper/repositories/Build-environment/modules/TIME/build/CMakeFiles/arduino-template.bin.dir
-/home/jasper/repositories/Build-environment/modules/TIME/build/CMakeFiles/arduino-template.elf.dir
-/home/jasper/repositories/Build-environment/modules/TIME/build/CMakeFiles/flash.dir
-/home/jasper/repositories/Build-environment/modules/TIME/build/CMakeFiles/arduino-template.hex.dir
