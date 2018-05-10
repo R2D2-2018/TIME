@@ -25,7 +25,9 @@ include_directories (${catch}/single_include)
 # Source Files:
 
 set (sources
-    src/time-manager.cpp
+    src/bcd_conversion.cpp
+    src/rtc_time.cpp
+    src/time_manager.cpp
     src/wrap-hwlib.cpp
     src/libc-stub.cpp
     src/main.cpp

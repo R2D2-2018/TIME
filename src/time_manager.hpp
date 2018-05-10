@@ -8,7 +8,11 @@
 #ifndef TIME_MANAGER_H
 #define TIME_MANAGER_H
 
+#include <cstdint>
+
 #include "wrap-hwlib.hpp"
+#include "rtc_time.hpp"
+#include "bcd_conversion.hpp"
 
 class TimeManager {
 private:
@@ -19,6 +23,9 @@ private:
 public:
     TimeManager(hwlib::target::pin_oc & scl, hwlib::target::pin_oc & sda);
 
+    RTCTime getTime();
+
+    void setTime(RTCTime timeAndDate);
 };
 
 #endif // TIME_MANAGER_H
