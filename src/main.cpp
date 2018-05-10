@@ -4,6 +4,7 @@
  * @author    Jasper Smienk
  * @license   MIT License
  */
+
 #include "wrap-hwlib.hpp"
 
 #include "time_manager.hpp"

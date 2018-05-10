@@ -4,6 +4,7 @@
  * @author    Jasper Smienk
  * @license   MIT License
  */
+
 #include "time_manager.hpp"
 
 TimeManager::TimeManager(hwlib::target::pin_oc & scl, hwlib::target::pin_oc & sda):

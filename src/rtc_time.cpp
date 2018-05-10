@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief     CPP file for the RTCTime struct.
+ * @author    Jasper Smienk
+ * @license   MIT License
+ */
+
 #include "rtc_time.hpp"
 
 uint8_t RTCTime::getSeconds() {
