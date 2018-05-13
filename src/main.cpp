@@ -20,6 +20,13 @@ int main() {
 
     auto clock = TimeManager(scl, sda);
 
+    RTCTime temp1;
+    RTCTime temp2;
+    temp1.set(5, 3, 12, 6, 28, 8, 19);
+    temp2.set(4, 2, 11, 5, 27, 7, 18);
+    hwlib::cout << (temp1 < temp2) << hwlib::endl;
+
+/*
     while (true) {
         RTCTime time = clock.getTime();
         hwlib::cout << static_cast<int>(time.getHours()) << ":"
@@ -36,6 +43,6 @@ int main() {
             clock.setTime(temp);
         }
     }
-
+*/
     return 0;
 }

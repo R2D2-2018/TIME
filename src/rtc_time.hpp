@@ -34,7 +34,7 @@ public:
      * 
      * @return The amount of seconds in decimal.
      */
-    uint8_t getSeconds();
+    uint8_t getSeconds() const;
     
     /**
      * @brief Get the amount of minutes.
@@ -43,7 +43,7 @@ public:
      * 
      * @return The amount of minutes in decimal.
      */
-    uint8_t getMinutes();
+    uint8_t getMinutes() const;
     
     /**
      * @brief Get the amount of hours.
@@ -52,7 +52,7 @@ public:
      * 
      * @return The amount of hours in decimal.
      */
-    uint8_t getHours();
+    uint8_t getHours() const;
     
     /**
      * @brief Get the day of the week.
@@ -61,7 +61,7 @@ public:
      * 
      * @return The the day of the week in decimal.
      */
-    uint8_t getDayOfTheWeek();
+    uint8_t getDayOfTheWeek() const;
     
     /**
      * @brief Get the day of the month.
@@ -70,7 +70,7 @@ public:
      * 
      * @return The day of the month in decimal.
      */
-    uint8_t getDayOfTheMonth();
+    uint8_t getDayOfTheMonth() const;
     
     /**
      * @brief Get the month number.
@@ -79,7 +79,7 @@ public:
      * 
      * @return The month in decimal.
      */
-    uint8_t getMonth();
+    uint8_t getMonth() const;
     
     /**
      * @brief Get the year number.
@@ -88,7 +88,7 @@ public:
      * 
      * @return The year in decimal.
      */
-    uint8_t getYear();
+    uint8_t getYear() const;
 
     /**
      * @brief Set the amount of seconds.
@@ -192,5 +192,50 @@ public:
             uint8_t dayOfTheMonth, uint8_t month, uint8_t year);
 
 };
+
+    /**
+     * @brief Less than operator.
+     * 
+     * Less than operator for comparing two RTCTime structs.
+     * 
+     * @param[in]   lhs    RTCTime struct for the left side of the operator.
+     * @param[in]   rhs    RTCTime struct for the right side of the operator.
+     * @return Boolean of whether or not the lhs is smaller than the rhs.
+     */
+bool operator< (const RTCTime& lhs, const RTCTime& rhs);
+
+    /**
+     * @brief More than operator.
+     * 
+     * More than operator for comparing two RTCTime structs.
+     * 
+     * @param[in]   lhs    RTCTime struct for the left side of the operator.
+     * @param[in]   rhs    RTCTime struct for the right side of the operator.
+     * @return Boolean of whether or not the lhs is larger than the rhs.
+     */
+bool operator> (const RTCTime& lhs, const RTCTime& rhs);
+
+    /**
+     * @brief Less than or equal operator.
+     * 
+     * Less than or equal operator for comparing two RTCTime structs.
+     * 
+     * @param[in]   lhs    RTCTime struct for the left side of the operator.
+     * @param[in]   rhs    RTCTime struct for the right side of the operator.
+     * @return Boolean of whether or not the lhs is smaller or equal than the rhs.
+     */
+bool operator<= (const RTCTime& lhs, const RTCTime& rhs);
+
+    /**
+     * @brief More than or equal operator.
+     * 
+     * More than or equal operator for comparing two RTCTime structs.
+     * 
+     * @param[in]   lhs    RTCTime struct for the left side of the operator.
+     * @param[in]   rhs    RTCTime struct for the right side of the operator.
+     * @return Boolean of whether or not the lhs is larger or equal than the rhs.
+     */
+bool operator>= (const RTCTime& lhs, const RTCTime& rhs);
+
 
 #endif // RTC_TIME_H
