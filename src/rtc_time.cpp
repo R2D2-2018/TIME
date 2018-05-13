@@ -88,36 +88,3 @@ void RTCTime::set(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t dayOf
     month = month;
     year = year;
 }
-
-bool operator< (const RTCTime& lhs, const RTCTime& rhs) {
-    if (lhs.getYear() > rhs.getYear()) return false;
-    else if (lhs.getYear() == rhs.getYear()) {
-        if (lhs.getMonth() > rhs.getMonth()) return false;
-        else if (lhs.getMonth() == rhs.getMonth()) {
-            if (lhs.getDayOfTheMonth() > rhs.getDayOfTheMonth()) return false;
-            else if (lhs.getDayOfTheMonth() == rhs.getDayOfTheMonth()) {
-                if (lhs.getHours() > rhs.getHours()) return false;
-                else if (lhs.getHours() == rhs.getHours()) {
-                    if (lhs.getMinutes() > rhs.getMinutes()) return false;
-                    else if (lhs.getMinutes() > rhs.getMinutes()) {
-                        if (lhs.getSeconds() > rhs.getSeconds()) return false;
-                    }
-                }
-            }
-        }
-    }
-    return true;
-}
-
-
-bool operator> (const RTCTime& lhs, const RTCTime& rhs) {
-    return (rhs < lhs);
-}
-
-bool operator<= (const RTCTime& lhs, const RTCTime& rhs) {
-    return !(lhs > rhs);
-}
-
-bool operator>= (const RTCTime& lhs, const RTCTime& rhs) {
-    return !(lhs < rhs);
-}

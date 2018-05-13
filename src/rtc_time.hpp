@@ -193,49 +193,4 @@ public:
 
 };
 
-    /**
-     * @brief Less than operator.
-     * 
-     * Less than operator for comparing two RTCTime structs.
-     * 
-     * @param[in]   lhs    RTCTime struct for the left side of the operator.
-     * @param[in]   rhs    RTCTime struct for the right side of the operator.
-     * @return Boolean of whether or not the lhs is smaller than the rhs.
-     */
-bool operator< (const RTCTime& lhs, const RTCTime& rhs);
-
-    /**
-     * @brief More than operator.
-     * 
-     * More than operator for comparing two RTCTime structs.
-     * 
-     * @param[in]   lhs    RTCTime struct for the left side of the operator.
-     * @param[in]   rhs    RTCTime struct for the right side of the operator.
-     * @return Boolean of whether or not the lhs is larger than the rhs.
-     */
-bool operator> (const RTCTime& lhs, const RTCTime& rhs);
-
-    /**
-     * @brief Less than or equal operator.
-     * 
-     * Less than or equal operator for comparing two RTCTime structs.
-     * 
-     * @param[in]   lhs    RTCTime struct for the left side of the operator.
-     * @param[in]   rhs    RTCTime struct for the right side of the operator.
-     * @return Boolean of whether or not the lhs is smaller or equal than the rhs.
-     */
-bool operator<= (const RTCTime& lhs, const RTCTime& rhs);
-
-    /**
-     * @brief More than or equal operator.
-     * 
-     * More than or equal operator for comparing two RTCTime structs.
-     * 
-     * @param[in]   lhs    RTCTime struct for the left side of the operator.
-     * @param[in]   rhs    RTCTime struct for the right side of the operator.
-     * @return Boolean of whether or not the lhs is larger or equal than the rhs.
-     */
-bool operator>= (const RTCTime& lhs, const RTCTime& rhs);
-
-
 #endif // RTC_TIME_H
