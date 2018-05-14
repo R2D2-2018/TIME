@@ -29,7 +29,6 @@ RTCTime TimeManager::getTime() {
 }
 
 void TimeManager::setTime(RTCTime timeAndDate) {
-    hwlib::cout << "Test" << hwlib::endl;
     uint8_t data[] = {0, decToBCD(timeAndDate.getSeconds()),
                          decToBCD(timeAndDate.getMinutes()),
                          decToBCD(timeAndDate.getHours()),
