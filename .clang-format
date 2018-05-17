@@ -13,7 +13,7 @@ AlwaysBreakTemplateDeclarations: true
 
 BasedOnStyle: 'LLVM'
 
-ColumnLimit: '132'
+ColumnLimit: '80'
 
 IndentWidth: '4'
 

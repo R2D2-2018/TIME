@@ -30,6 +30,13 @@ struct RTCTime {
     RTCTime(){};
 
     /**
+     * @brief Constructor of RTCTime which can set all values
+     */
+    RTCTime(uint8_t seconds, uint8_t minutes, uint8_t hours,
+            uint8_t dayOfTheWeek, uint8_t dayOfTheMonth, uint8_t month,
+            uint8_t year);
+
+    /**
      * @brief Get the amount of seconds.
      *
      * Get the amount of seconds in decimal.
@@ -180,7 +187,8 @@ struct RTCTime {
     /**
      * @brief Set all the values.
      *
-     * Set the values seconds, minutes, hours, dayOfTheWeek, dayOfTheMonth, month and year.
+     * Set the values seconds, minutes, hours, dayOfTheWeek, dayOfTheMonth,
+     * month and year.
      *
      * @param[in]   seconds   The amount of seconds in decimal.
      * @param[in]   minutes   The amount of minutes in decimal.
@@ -190,7 +198,8 @@ struct RTCTime {
      * @param[in]   month     The month in decimal.
      * @param[in]   year      The year in decimal.
      */
-    void set(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t dayOfTheWeek, uint8_t dayOfTheMonth, uint8_t month,
+    void set(uint8_t seconds, uint8_t minutes, uint8_t hours,
+             uint8_t dayOfTheWeek, uint8_t dayOfTheMonth, uint8_t month,
              uint8_t year);
 
     /**
@@ -229,7 +238,8 @@ struct RTCTime {
      * Less than or equal operator for comparing two RTCTime structs.
      *
      * @param[in]   rhs    RTCTime struct for the right side of the operator.
-     * @return Boolean of whether or not the lhs is smaller or equal than the rhs.
+     * @return Boolean of whether or not the lhs is smaller or equal than the
+     * rhs.
      */
     bool operator<=(const RTCTime &rhs) const;
 
@@ -239,10 +249,10 @@ struct RTCTime {
      * More than or equal operator for comparing two RTCTime structs.
      *
      * @param[in]   rhs    RTCTime struct for the right side of the operator.
-     * @return Boolean of whether or not the lhs is larger or equal than the rhs.
+     * @return Boolean of whether or not the lhs is larger or equal than the
+     * rhs.
      */
     bool operator>=(const RTCTime &rhs) const;
-
 };
 
 } // namespace time

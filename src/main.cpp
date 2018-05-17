@@ -1,6 +1,7 @@
 /**
  * @file
- * @brief     Main file for the TimeManager class to control the DS3231 RTC module
+ * @brief     Main file for the TimeManager class to control the DS3231 RTC
+ * module
  * @author    Jasper Smienk
  * @license   MIT License
  */
@@ -26,9 +27,12 @@ int main() {
 
     while (true) {
         time::RTCTime time = clock.getTime();
-        hwlib::cout << static_cast<int>(time.getHours()) << ":" << static_cast<int>(time.getMinutes()) << ":"
-                    << static_cast<int>(time.getSeconds()) << " - " << static_cast<int>(time.getDayOfTheWeek()) << " "
-                    << static_cast<int>(time.getDayOfTheMonth()) << "/" << static_cast<int>(time.getMonth()) << "/"
+        hwlib::cout << static_cast<int>(time.getHours()) << ":"
+                    << static_cast<int>(time.getMinutes()) << ":"
+                    << static_cast<int>(time.getSeconds()) << " - "
+                    << static_cast<int>(time.getDayOfTheWeek()) << " "
+                    << static_cast<int>(time.getDayOfTheMonth()) << "/"
+                    << static_cast<int>(time.getMonth()) << "/"
                     << static_cast<int>(time.getYear()) << hwlib::endl;
         hwlib::wait_ms(100);
     }
