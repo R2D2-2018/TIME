@@ -18,11 +18,14 @@ int main() {
     auto scl = hwlib::target::pin_oc(hwlib::target::pins::scl);
     auto sda = hwlib::target::pin_oc(hwlib::target::pins::sda);
 
-    auto clock = TimeManager(scl, sda);
+    auto clock = time::TimeManager(scl, sda);
 
+    time::RTCTime temp;
+    temp.set(0, 11, 10, 1, 14, 5, 18);
+    //clock.setTime(temp);
 
     while (true) {
-        RTCTime time = clock.getTime();
+        time::RTCTime time = clock.getTime();
         hwlib::cout << static_cast<int>(time.getHours()) << ":"
                     << static_cast<int>(time.getMinutes()) << ":"
                     << static_cast<int>(time.getSeconds()) << " - "
@@ -31,11 +34,6 @@ int main() {
                     << static_cast<int>(time.getMonth()) << "/"
                     << static_cast<int>(time.getYear()) << hwlib::endl;
         hwlib::wait_ms(100);
-        if (static_cast<int>(time.getMinutes()) > 0) {
-            RTCTime temp;
-            temp.set(10, 0, 4, 5, 10, 21, 74);
-            clock.setTime(temp);
-        }
     }
     return 0;
 }
