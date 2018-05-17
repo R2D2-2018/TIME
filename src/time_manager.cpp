@@ -10,8 +10,7 @@
 
 namespace time {
 TimeManager::TimeManager(hwlib::target::pin_oc &scl, hwlib::target::pin_oc &sda)
-    : scl(scl), sda(sda),
-      realTimeClock(hwlib::i2c_bus_bit_banged_scl_sda(scl, sda)) {
+    : scl(scl), sda(sda), realTimeClock(hwlib::i2c_bus_bit_banged_scl_sda(scl, sda)) {
 }
 
 RTCTime TimeManager::getTime() {
@@ -22,9 +21,8 @@ RTCTime TimeManager::getTime() {
     realTimeClock.read(0x68, data, 7);
 
     RTCTime timeAndDate;
-    timeAndDate.set(BCDToDec(data[0]), BCDToDec(data[1]), BCDToDec(data[2]),
-                    BCDToDec(data[3]), BCDToDec(data[4]), BCDToDec(data[5]),
-                    BCDToDec(data[6]));
+    timeAndDate.set(BCDToDec(data[0]), BCDToDec(data[1]), BCDToDec(data[2]), BCDToDec(data[3]), BCDToDec(data[4]),
+                    BCDToDec(data[5]), BCDToDec(data[6]));
     return timeAndDate;
 }
 

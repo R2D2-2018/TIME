@@ -32,8 +32,7 @@ struct RTCTime {
     /**
      * @brief Constructor of RTCTime which can set all values
      */
-    RTCTime(uint8_t seconds, uint8_t minutes, uint8_t hours,
-            uint8_t dayOfTheWeek, uint8_t dayOfTheMonth, uint8_t month,
+    RTCTime(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t dayOfTheWeek, uint8_t dayOfTheMonth, uint8_t month,
             uint8_t year);
 
     /**
@@ -198,8 +197,7 @@ struct RTCTime {
      * @param[in]   month     The month in decimal.
      * @param[in]   year      The year in decimal.
      */
-    void set(uint8_t seconds, uint8_t minutes, uint8_t hours,
-             uint8_t dayOfTheWeek, uint8_t dayOfTheMonth, uint8_t month,
+    void set(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t dayOfTheWeek, uint8_t dayOfTheMonth, uint8_t month,
              uint8_t year);
 
     /**
