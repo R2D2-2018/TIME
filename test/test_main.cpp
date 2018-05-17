@@ -20,3 +20,14 @@ TEST_CASE("Time is running") {
 
     REQUIRE(firstTime != secondTime);
 }
+
+TEST_CASE("RTCTime comparisons") {
+    RTCTime time1(1, 2, 3, 4, 5, 6, 7);
+    RTCTime time2(2, 3, 4, 5, 6, 7, 8);
+
+    REQUIRE((time1 < time2) == true);
+    REQUIRE((time2 > time1) == true);
+    REQUIRE((time1 <= time1) == true);
+    REQUIRE((time1 >= time1) == true);
+    REQUIRE((time1 == time1) == true);
+}
