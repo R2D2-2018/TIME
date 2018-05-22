@@ -88,6 +88,7 @@ void RTCTime::set(uint8_t newSeconds, uint8_t newMinutes, uint8_t newHours, uint
     setHours(newHours);
     setDayOfTheWeek(newDayOfTheWeek);
     setDayOfTheMonth(newDayOfTheMonth);
+    setMonth(newMonth);
     setYear(newYear);
 }
 
