@@ -19,13 +19,13 @@ int main() {
     auto scl = hwlib::target::pin_oc(hwlib::target::pins::scl);
     auto sda = hwlib::target::pin_oc(hwlib::target::pins::sda);
 
-    auto clock = time::TimeManager(scl, sda);
+    auto clock = Time::TimeManager(scl, sda);
 
-    time::RTCTime temp(0, 11, 10, 1, 14, 5, 18);
+    Time::RTCTime temp(0, 11, 10, 1, 14, 5, 18);
     // clock.setTime(temp);
 
     while (true) {
-        time::RTCTime time = clock.getTime();
+        Time::RTCTime time = clock.getTime();
         hwlib::cout << static_cast<int>(time.getHours()) << ":" << static_cast<int>(time.getMinutes()) << ":"
                     << static_cast<int>(time.getSeconds()) << " - " << static_cast<int>(time.getDayOfTheWeek()) << " "
                     << static_cast<int>(time.getDayOfTheMonth()) << "/" << static_cast<int>(time.getMonth()) << "/"

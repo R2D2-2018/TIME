@@ -7,7 +7,7 @@
 
 #include "rtc_time.hpp"
 
-namespace time {
+namespace Time {
 RTCTime::RTCTime(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t dayOfTheWeek, uint8_t dayOfTheMonth, uint8_t month,
                  uint8_t year)
     : seconds(seconds), minutes(minutes), hours(hours), dayOfTheWeek(dayOfTheWeek), dayOfTheMonth(dayOfTheMonth), month(month),
@@ -117,4 +117,4 @@ bool RTCTime::operator>=(const RTCTime &rhs) const {
            std::tie(rhs.year, rhs.month, rhs.dayOfTheMonth, rhs.hours, rhs.minutes, rhs.seconds);
 }
 
-} // namespace time
+} // namespace Time

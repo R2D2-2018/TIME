@@ -6,8 +6,8 @@
  * @license   MIT License
  */
 
-#ifndef TIME_MANAGER_H
-#define TIME_MANAGER_H
+#ifndef TIME_MANAGER_HPP
+#define TIME_MANAGER_HPP
 
 #include <cstdint>
 
@@ -15,11 +15,11 @@
 #include "rtc_time.hpp"
 #include "wrap-hwlib.hpp"
 
-namespace time {
+namespace Time {
 class TimeManager {
   private:
-    hwlib::target::pin_oc &scl;
-    hwlib::target::pin_oc &sda;
+    hwlib::pin_oc &scl;
+    hwlib::pin_oc &sda;
     hwlib::i2c_bus_bit_banged_scl_sda realTimeClock;
 
   public:
@@ -31,7 +31,7 @@ class TimeManager {
      * @param[in]     scl    The clock pin for the i2c connection.
      * @param[in]     sda    The data pin for the i2c connection.
      */
-    TimeManager(hwlib::target::pin_oc &scl, hwlib::target::pin_oc &sda);
+    TimeManager(hwlib::pin_oc &scl, hwlib::pin_oc &sda);
 
     /**
      * @brief Get the time.
@@ -51,6 +51,6 @@ class TimeManager {
      */
     void setTime(RTCTime timeAndDate);
 };
-} // namespace time
+} // namespace Time
 
-#endif // TIME_MANAGER_H
+#endif // TIME_MANAGER_HPP
