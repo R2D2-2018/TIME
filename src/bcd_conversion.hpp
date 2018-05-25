@@ -5,8 +5,8 @@
  * @license   MIT License
  */
 
-#ifndef BCD_CONVERSION_H
-#define BCD_CONVERSION_H
+#ifndef BCD_CONVERSION_HPP
+#define BCD_CONVERSION_HPP
 
 #include <cstdint>
 
@@ -32,4 +32,4 @@ uint8_t decToBCD(uint8_t dec);
  */
 uint8_t BCDToDec(uint8_t bcd);
 
-#endif // BCD_CONVERSION_H
+#endif // BCD_CONVERSION_HPP

@@ -8,8 +8,8 @@
 
 #include "time_manager.hpp"
 
-namespace time {
-TimeManager::TimeManager(hwlib::target::pin_oc &scl, hwlib::target::pin_oc &sda)
+namespace Time {
+TimeManager::TimeManager(hwlib::pin_oc &scl, hwlib::pin_oc &sda)
     : scl(scl), sda(sda), realTimeClock(hwlib::i2c_bus_bit_banged_scl_sda(scl, sda)) {
 }
 
@@ -37,4 +37,4 @@ void TimeManager::setTime(RTCTime timeAndDate) {
                       decToBCD(timeAndDate.getYear())};
     realTimeClock.write(0x68, data, 8);
 }
-} // namespace time
+} // namespace Time

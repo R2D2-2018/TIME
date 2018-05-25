@@ -1,33 +1,28 @@
-#define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
+#define CATCH_CONFIG_MAIN // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
-#include "../src/time_manager.hpp"
-#include "../src/rtc_time.hpp"
-#include "../src/wrap-hwlib.hpp"
-
-TEST_CASE( "Example Test Case" ) {
-    REQUIRE(10 == 10);
-}
-
-TEST_CASE("Time is running") {
-    auto scl = hwlib::target::pin_oc(hwlib::target::pins::scl);
-    auto sda = hwlib::target::pin_oc(hwlib::target::pins::sda);
-
-    auto clock = time::TimeManager(scl, sda);
-
-    auto firstTime = clock.getTime().getSeconds();
-    hwlib::wait_ms(2000);
-    auto secondTime = clock.getTime().getSeconds();
-
-    REQUIRE(firstTime != secondTime);
-}
+#include "rtc_time.hpp"
 
 TEST_CASE("RTCTime comparisons") {
-    RTCTime time1(1, 2, 3, 4, 5, 6, 7);
-    RTCTime time2(2, 3, 4, 5, 6, 7, 8);
+    Time::RTCTime time1(1, 2, 3, 4, 5, 6, 7);
+    Time::RTCTime time2(2, 3, 4, 5, 6, 7, 8);
 
-    REQUIRE((time1 < time2) == true);
-    REQUIRE((time2 > time1) == true);
-    REQUIRE((time1 <= time1) == true);
-    REQUIRE((time1 >= time1) == true);
-    REQUIRE((time1 == time1) == true);
+    SECTION("Test less-than operator") {
+        REQUIRE((time1 < time2) == true);
+    }
+
+    SECTION("Test more-than operator") {
+        REQUIRE((time2 > time1) == true);
+    }
+
+    SECTION("Test less-than-or-equal operator") {
+        REQUIRE((time1 <= time1) == true);
+    }
+
+    SECTION("Test more-than-or-equal operator") {
+        REQUIRE((time1 >= time1) == true);
+    }
+
+    SECTION("Test equal operator") {
+        REQUIRE((time1 == time1) == true);
+    }
 }

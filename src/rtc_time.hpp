@@ -5,14 +5,14 @@
  * @license   MIT License
  */
 
-#ifndef RTC_TIME_H
-#define RTC_TIME_H
+#ifndef RTC_TIME_HPP
+#define RTC_TIME_HPP
 
 #include <cstdint>
 #include <tuple>
 #include <vector>
 
-namespace time {
+namespace Time {
 struct RTCTime {
   private:
     uint8_t seconds;
@@ -253,6 +253,6 @@ struct RTCTime {
     bool operator>=(const RTCTime &rhs) const;
 };
 
-} // namespace time
+} // namespace Time
 
-#endif // RTC_TIME_H
+#endif // RTC_TIME_HPP
