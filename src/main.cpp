@@ -21,16 +21,20 @@ int main() {
 
     auto clock = Time::TimeManager(scl, sda);
 
-    Time::RTCTime temp(0, 11, 10, 1, 14, 5, 18);
-    // clock.setTime(temp);
+    Time::RTCTime temp(43, 32, 21, 1, 14, 5, 19);
+    hwlib::cout << temp.getTotalSeconds() << hwlib::endl;
 
-    while (true) {
-        Time::RTCTime time = clock.getTime();
-        hwlib::cout << static_cast<int>(time.getHours()) << ":" << static_cast<int>(time.getMinutes()) << ":"
-                    << static_cast<int>(time.getSeconds()) << " - " << static_cast<int>(time.getDayOfTheWeek()) << " "
-                    << static_cast<int>(time.getDayOfTheMonth()) << "/" << static_cast<int>(time.getMonth()) << "/"
-                    << static_cast<int>(time.getYear()) << hwlib::endl;
-        hwlib::wait_ms(100);
-    }
+    // temp.setTotalSeconds(temp.getTotalSeconds());
+
+    /*
+     while (true) {
+         Time::RTCTime time = clock.getTime();
+         hwlib::cout << static_cast<int>(time.getHours()) << ":" << static_cast<int>(time.getMinutes()) << ":"
+                     << static_cast<int>(time.getSeconds()) << " - " << static_cast<int>(time.getDayOfTheWeek()) << " "
+                     << static_cast<int>(time.getDayOfTheMonth()) << "/" << static_cast<int>(time.getMonth()) << "/"
+                     << static_cast<int>(time.getYear()) << hwlib::endl;
+         hwlib::wait_ms(100);
+     }
+     */
     return 0;
 }

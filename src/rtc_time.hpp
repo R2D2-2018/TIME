@@ -9,19 +9,22 @@
 #define RTC_TIME_HPP
 
 #include <cstdint>
+//#include <iostream>
 #include <tuple>
 #include <vector>
+
+#include "wrap-hwlib.hpp"
 
 namespace Time {
 struct RTCTime {
   private:
-    uint8_t seconds;
-    uint8_t minutes;
-    uint8_t hours;
-    uint8_t dayOfTheWeek;
-    uint8_t dayOfTheMonth;
-    uint8_t month;
-    uint8_t year;
+    uint8_t seconds = 0;
+    uint8_t minutes = 0;
+    uint8_t hours = 0;
+    uint8_t dayOfTheWeek = 0;
+    uint8_t dayOfTheMonth = 0;
+    uint8_t month = 0;
+    uint8_t year = 0;
 
   public:
     /**
@@ -97,6 +100,16 @@ struct RTCTime {
      * @return The year in decimal.
      */
     uint8_t getYear() const;
+
+    /**
+     * @brief Get the total time in seconds.
+     *
+     * Get the total time of the whole struct in seconds.
+     * 1 minute is 60 seconds, 1 hour is 3600 seconds, etc.
+     *
+     * @return The total time in seconds.
+     */
+    unsigned long getTotalSeconds() const;
 
     /**
      * @brief Set the amount of seconds.
@@ -251,6 +264,19 @@ struct RTCTime {
      * rhs.
      */
     bool operator>=(const RTCTime &rhs) const;
+
+    /**
+     * @brief Subtract operator.
+     *
+     * Subtract operator for subtracting two RTCTime structs.
+     * The result will be in seconds.
+     *
+     * @param[in]   rhs    RTCTime struct for the right side of the operator.
+     * @return unsigned long long The delta between the two structs in seconds.
+     */
+    unsigned long long operator-(const RTCTime &rhs) const;
+
+    friend std::ostream &operator<<(std::ostream &, const RTCTime &rhs);
 };
 
 } // namespace Time
