@@ -37,4 +37,13 @@ void TimeManager::setTime(RTCTime timeAndDate) {
                       decToBCD(timeAndDate.getYear())};
     realTimeClock.write(0x68, data, 8);
 }
+
+void TimeManager::setTime(int alarmId, RTCTime newAlarm) {
+    alarm = newAlarm;
+    alarmRunning = true;
+}
+
+void TimeManager::clearTime(int alarmId) {
+    alarmRunning = false;
+}
 } // namespace Time
