@@ -22,8 +22,16 @@ int main() {
     auto clock = Time::TimeManager(scl, sda);
 
     Time::RTCTime temp(43, 32, 21, 1, 14, 5, 19);
-    hwlib::cout << temp.getTotalSeconds() << hwlib::endl;
+    Time::RTCTime temp2(1, 2, 3, 0, 5, 3, 1);
 
+    hwlib::cout << (temp - temp2) << hwlib::endl;
+
+    clock.setTime(temp);
+    char someInput;
+    while (true) {
+        hwlib::cin >> someInput;
+        hwlib::cout << (clock.getTime().getTotalSeconds() - temp.getTotalSeconds()) << hwlib::endl;
+    }
     // temp.setTotalSeconds(temp.getTotalSeconds());
 
     /*

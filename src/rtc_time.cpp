@@ -42,48 +42,12 @@ uint8_t RTCTime::getYear() const {
 }
 
 unsigned long RTCTime::getTotalSeconds() const {
-    unsigned long totalDays = (year % 4 == 0 ? 1 : 0);
-    switch (month) { // A switchcase is used because not every month is off equal length.
-    case 1:          // Todo: Figure out a formula for this.
-        totalDays = 0;
-        break;
-    case 2:
-        totalDays = 31;
-        break;
-    case 3:
-        totalDays += 59;
-        break;
-    case 4:
-        totalDays += 90;
-        break;
-    case 5:
-        totalDays += 120;
-        break;
-    case 6:
-        totalDays += 151;
-        break;
-    case 7:
-        totalDays += 181;
-        break;
-    case 8:
-        totalDays += 212;
-        break;
-    case 9:
-        totalDays += 243;
-        break;
-    case 10:
-        totalDays += 273;
-        break;
-    case 11:
-        totalDays += 304;
-        break;
-    case 12:
-        totalDays += 334;
-        break;
-    }
-    totalDays += (dayOfTheMonth - 1);
-    totalDays += (year * 365);
-    totalDays += (year / 4); // Add 1 day for each leap year.
+    unsigned long totalDays = (year % 4 == 0 && month > 2 ? 1 : 0);
+    std::array<int, 12> daysTillMonth = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
+    totalDays += daysTillMonth[month - 1]; // <- Total days in current year without the days in the current month.
+    totalDays += (dayOfTheMonth - 1);      // <- Add the days in the current month.
+    totalDays += (year * 365);             // <- Days in a standard year.
+    totalDays += ((year + 3) / 4);         // <- Add 1 day for each leap year.
     return seconds + (minutes * 60) + (hours * 3600) + (totalDays * 86400);
 }
 
@@ -122,6 +86,36 @@ void RTCTime::setMonth(uint8_t newMonth) {
 
 void RTCTime::setYear(uint8_t newYear) {
     year = newYear % 100;
+}
+
+void RTCTime::setTotalSeconds(unsigned long totalSeconds) {
+    int newYear = 0;
+    while (totalSeconds >= 31536000) {                      // <- Total seconds of non-leap year.
+        if (newYear % 4 == 0 && totalSeconds >= 31622400) { // <- Check if leap year.
+            newYear++;
+            totalSeconds -= 31622400;
+        } else if (newYear % 4 != 0 && totalSeconds >= 31536000) { // Check if non-leap year
+            newYear++;
+            totalSeconds -= 31536000;
+        } else {
+            break;
+        }
+    }
+    setYear(newYear);
+    int newMonth = 0;
+    std::array<int, 12> daysInMonth = {31, (year % 4 == 0 ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    while (totalSeconds >= (daysInMonth[newMonth] * 86400)) {
+        totalSeconds -= (daysInMonth[newMonth] * 86400);
+        newMonth++;
+    }
+    setMonth(newMonth + 1);
+    setDayOfTheMonth((totalSeconds / 86400) + 1);
+    totalSeconds %= 86400;
+    setHours(totalSeconds / 3600);
+    totalSeconds %= 3600;
+    setMinutes(totalSeconds / 60);
+    totalSeconds %= 60;
+    setSeconds(totalSeconds);
 }
 
 void RTCTime::setTime(uint8_t newSeconds, uint8_t newMinutes, uint8_t newHours) {
@@ -172,16 +166,7 @@ bool RTCTime::operator>=(const RTCTime &rhs) const {
            std::tie(rhs.year, rhs.month, rhs.dayOfTheMonth, rhs.hours, rhs.minutes, rhs.seconds);
 }
 
-unsigned long long RTCTime::operator-(const RTCTime &rhs) const {
+long long RTCTime::operator-(const RTCTime &rhs) const {
     return (getTotalSeconds() - rhs.getTotalSeconds());
 }
-/*
-std::ostream &operator<<(std::ostream &stream, const RTCTime &rhs) {
-    stream << static_cast<int>(rhs.getHours()) << ":" << static_cast<int>(rhs.getMinutes()) << ":"
-           << static_cast<int>(rhs.getSeconds()) << " - " << static_cast<int>(rhs.getDayOfTheWeek()) << " "
-           << static_cast<int>(rhs.getDayOfTheMonth()) << "/" << static_cast<int>(rhs.getMonth()) << "/"
-           << static_cast<int>(rhs.getYear());
-    return stream;
-}*/
-
 } // namespace Time

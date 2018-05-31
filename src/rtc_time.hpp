@@ -8,8 +8,8 @@
 #ifndef RTC_TIME_HPP
 #define RTC_TIME_HPP
 
+#include <array>
 #include <cstdint>
-//#include <iostream>
 #include <tuple>
 #include <vector>
 
@@ -21,9 +21,9 @@ struct RTCTime {
     uint8_t seconds = 0;
     uint8_t minutes = 0;
     uint8_t hours = 0;
-    uint8_t dayOfTheWeek = 0;
-    uint8_t dayOfTheMonth = 0;
-    uint8_t month = 0;
+    uint8_t dayOfTheWeek = 1;
+    uint8_t dayOfTheMonth = 1;
+    uint8_t month = 1;
     uint8_t year = 0;
 
   public:
@@ -175,6 +175,14 @@ struct RTCTime {
     void setYear(uint8_t year);
 
     /**
+     * @brief Set the total amount of seconds.
+     *
+     * Set the time using the total amount of seconds.
+     *
+     * @param[in]   totalSeconds   Total amount of seconds.
+     */
+    void setTotalSeconds(unsigned long totalSeconds);
+    /**
      * @brief Set the time.
      *
      * Set the values seconds, minutes and hours.
@@ -274,9 +282,7 @@ struct RTCTime {
      * @param[in]   rhs    RTCTime struct for the right side of the operator.
      * @return unsigned long long The delta between the two structs in seconds.
      */
-    unsigned long long operator-(const RTCTime &rhs) const;
-
-    friend std::ostream &operator<<(std::ostream &, const RTCTime &rhs);
+    long long operator-(const RTCTime &rhs) const;
 };
 
 } // namespace Time
