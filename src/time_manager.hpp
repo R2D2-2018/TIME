@@ -22,6 +22,9 @@ class TimeManager {
     hwlib::pin_oc &sda;
     hwlib::i2c_bus_bit_banged_scl_sda realTimeClock;
 
+    RTCTime alarm;
+    bool alarmRunning;
+
   public:
     /**
      * @brief Default constructor.
@@ -50,6 +53,25 @@ class TimeManager {
      * @param[in]     timeAndDate    A RTCTime struct with the desired date.
      */
     void setTime(RTCTime timeAndDate);
+
+    /**
+     * @brief Set the alarm.
+     *
+     * Set the alarm time to a new time.
+     *
+     * @param[in]     alarmId     Number of alarm. (Ignored for now)
+     * @param[in]     newAlarm    A RTCTime struct with the new alarm.
+     */
+    void setTime(int alarmId, RTCTime newAlarm);
+
+    /**
+     * @brief Clear the alarm.
+     *
+     * Resets the alarm so that is doesn't run anymore.
+     *
+     * @param[in]     alarmId     Number of alarm. (Ignored for now)
+     */
+    void clearTime(int alarmId);
 };
 } // namespace Time
 
