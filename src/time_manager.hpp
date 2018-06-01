@@ -62,7 +62,7 @@ class TimeManager {
      * @param[in]     alarmId     Number of alarm. (Ignored for now)
      * @param[in]     newAlarm    A RTCTime struct with the new alarm.
      */
-    void setTime(int alarmId, RTCTime newAlarm);
+    void setAlarm(int alarmId, RTCTime newAlarm);
 
     /**
      * @brief Clear the alarm.
@@ -71,7 +71,7 @@ class TimeManager {
      *
      * @param[in]     alarmId     Number of alarm. (Ignored for now)
      */
-    void clearTime(int alarmId);
+    void clearAlarm(int alarmId);
 };
 } // namespace Time
 
