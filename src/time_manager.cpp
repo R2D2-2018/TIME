@@ -58,9 +58,8 @@ RTCTime TimeManager::elapsedTime(int timerId) {
     if (timerRunning) {
         // return (getTime() - timer);
         return RTCTime();
-    } else {
-        return RTCTime();
     }
+    return RTCTime();
 }
 
 void TimeManager::resetTimer(int timerId) {
