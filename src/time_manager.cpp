@@ -46,4 +46,31 @@ void TimeManager::setTime(int alarmId, RTCTime newAlarm) {
 void TimeManager::clearTime(int alarmId) {
     alarmRunning = false;
 }
+
+void TimeManager::setTimer(int timerId) {
+    if (!timerRunning) {
+        timer = getTime();
+        timerRunning = true;
+    }
+}
+
+RTCTime TimeManager::elapsedTime(int timerId) {
+    if (timerRunning) {
+        // return (getTime() - timer);
+        return RTCTime();
+    } else {
+        return RTCTime();
+    }
+}
+
+void TimeManager::resetTimer(int timerId) {
+    if (timerRunning) {
+        timer = getTime();
+    }
+}
+
+void TimeManager::clearTimer(int timerId) {
+    timer = RTCTime();
+    timerRunning = false;
+}
 } // namespace Time
