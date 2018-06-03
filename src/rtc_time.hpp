@@ -39,6 +39,11 @@ struct RTCTime {
             uint8_t year);
 
     /**
+     * @brief Constructor which uses just 1 value for the total seconds.
+     */
+    RTCTime(uint64_t totalSeconds);
+
+    /**
      * @brief Get the amount of seconds.
      *
      * Get the amount of seconds in decimal.
@@ -109,7 +114,7 @@ struct RTCTime {
      *
      * @return The total time in seconds.
      */
-    unsigned long getTotalSeconds() const;
+    uint64_t getTotalSeconds() const;
 
     /**
      * @brief Set the amount of seconds.
@@ -181,7 +186,7 @@ struct RTCTime {
      *
      * @param[in]   totalSeconds   Total amount of seconds.
      */
-    void setTotalSeconds(unsigned long totalSeconds);
+    void setTotalSeconds(uint64_t totalSeconds);
     /**
      * @brief Set the time.
      *
@@ -280,9 +285,9 @@ struct RTCTime {
      * The result will be in seconds.
      *
      * @param[in]   rhs    RTCTime struct for the right side of the operator.
-     * @return unsigned long long The delta between the two structs in seconds.
+     * @return RTCTime The delta between the two structs in a RTCTime struct.
      */
-    long long operator-(const RTCTime &rhs) const;
+    RTCTime operator-(const RTCTime &rhs) const;
 
     /**
      * @brief Subtract equals operator.
@@ -302,9 +307,9 @@ struct RTCTime {
      * The result will be in seconds.
      *
      * @param[in]   rhs    RTCTime struct for the right side of the operator.
-     * @return unsigned long long The delta between the two structs in seconds.
+     * @return RTCTime The delta between the two structs in a RTCTime struct.
      */
-    long long operator+(const RTCTime &rhs) const;
+    RTCTime operator+(const RTCTime &rhs) const;
 
     /**
      * @brief Plus equals operator.
