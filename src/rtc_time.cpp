@@ -97,13 +97,14 @@ void RTCTime::setTotalSeconds(unsigned long totalSeconds) {
         } else if (newYear % 4 != 0 && totalSeconds >= 31536000) { // Check if non-leap year
             newYear++;
             totalSeconds -= 31536000;
+
         } else {
             break;
         }
     }
     setYear(newYear);
     int newMonth = 0;
-    std::array<int, 12> daysInMonth = {31, (year % 4 == 0 ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    std::array<int, 12> daysInMonth = {31, (newYear % 4 == 0 ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     while (totalSeconds >= (daysInMonth[newMonth] * 86400)) {
         totalSeconds -= (daysInMonth[newMonth] * 86400);
         newMonth++;
@@ -168,5 +169,19 @@ bool RTCTime::operator>=(const RTCTime &rhs) const {
 
 long long RTCTime::operator-(const RTCTime &rhs) const {
     return (getTotalSeconds() - rhs.getTotalSeconds());
+}
+
+RTCTime &RTCTime::operator-=(const RTCTime &rhs) {
+    this->setTotalSeconds(*this - rhs);
+    return *this;
+}
+
+long long RTCTime::operator+(const RTCTime &rhs) const {
+    return (getTotalSeconds() + rhs.getTotalSeconds());
+}
+
+RTCTime &RTCTime::operator+=(const RTCTime &rhs) {
+    this->setTotalSeconds(*this + rhs);
+    return *this;
 }
 } // namespace Time

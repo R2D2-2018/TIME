@@ -283,6 +283,39 @@ struct RTCTime {
      * @return unsigned long long The delta between the two structs in seconds.
      */
     long long operator-(const RTCTime &rhs) const;
+
+    /**
+     * @brief Subtract equals operator.
+     *
+     * Subtract equals operator for subtracting two RTCTime structs.
+     * The lhs will be the result.
+     *
+     * @param[in]   rhs    RTCTime struct for the right side of the operator.
+     * @return The lhs object where the result is saved in.
+     */
+    RTCTime &operator-=(const RTCTime &rhs);
+
+    /**
+     * @brief Plus operator.
+     *
+     * Plus operator for adding two RTCTime structs together.
+     * The result will be in seconds.
+     *
+     * @param[in]   rhs    RTCTime struct for the right side of the operator.
+     * @return unsigned long long The delta between the two structs in seconds.
+     */
+    long long operator+(const RTCTime &rhs) const;
+
+    /**
+     * @brief Plus equals operator.
+     *
+     * Plus equals operator for adding two RTCTime structs together.
+     * The lhs will be the result.
+     *
+     * @param[in]   rhs    RTCTime struct for the right side of the operator.
+     * @return The lhs object where the result is saved in.
+     */
+    RTCTime &operator+=(const RTCTime &rhs);
 };
 
 } // namespace Time
