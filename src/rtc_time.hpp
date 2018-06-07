@@ -8,20 +8,23 @@
 #ifndef RTC_TIME_HPP
 #define RTC_TIME_HPP
 
+#include <array>
 #include <cstdint>
 #include <tuple>
 #include <vector>
 
+#include "wrap-hwlib.hpp"
+
 namespace Time {
 struct RTCTime {
   private:
-    uint8_t seconds;
-    uint8_t minutes;
-    uint8_t hours;
-    uint8_t dayOfTheWeek;
-    uint8_t dayOfTheMonth;
-    uint8_t month;
-    uint8_t year;
+    uint8_t seconds = 0;
+    uint8_t minutes = 0;
+    uint8_t hours = 0;
+    uint8_t dayOfTheWeek = 1;
+    uint8_t dayOfTheMonth = 1;
+    uint8_t month = 1;
+    uint8_t year = 0;
 
   public:
     /**
@@ -34,6 +37,11 @@ struct RTCTime {
      */
     RTCTime(uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t dayOfTheWeek, uint8_t dayOfTheMonth, uint8_t month,
             uint8_t year);
+
+    /**
+     * @brief Constructor which uses just 1 value for the total seconds.
+     */
+    RTCTime(uint64_t totalSeconds);
 
     /**
      * @brief Get the amount of seconds.
@@ -99,6 +107,16 @@ struct RTCTime {
     uint8_t getYear() const;
 
     /**
+     * @brief Get the total time in seconds.
+     *
+     * Get the total time of the whole struct in seconds.
+     * 1 minute is 60 seconds, 1 hour is 3600 seconds, etc.
+     *
+     * @return The total time in seconds.
+     */
+    uint64_t getTotalSeconds() const;
+
+    /**
      * @brief Set the amount of seconds.
      *
      * Set the amount of seconds in decimal.
@@ -161,6 +179,14 @@ struct RTCTime {
      */
     void setYear(uint8_t year);
 
+    /**
+     * @brief Set the total amount of seconds.
+     *
+     * Set the time using the total amount of seconds.
+     *
+     * @param[in]   totalSeconds   Total amount of seconds.
+     */
+    void setTotalSeconds(uint64_t totalSeconds);
     /**
      * @brief Set the time.
      *
@@ -251,6 +277,50 @@ struct RTCTime {
      * rhs.
      */
     bool operator>=(const RTCTime &rhs) const;
+
+    /**
+     * @brief Subtract operator.
+     *
+     * Subtract operator for subtracting two RTCTime structs.
+     * The result will be in seconds.
+     *
+     * @param[in]   rhs    RTCTime struct for the right side of the operator.
+     * @return RTCTime The delta between the two structs in a RTCTime struct.
+     */
+    RTCTime operator-(const RTCTime &rhs) const;
+
+    /**
+     * @brief Subtract equals operator.
+     *
+     * Subtract equals operator for subtracting two RTCTime structs.
+     * The lhs will be the result.
+     *
+     * @param[in]   rhs    RTCTime struct for the right side of the operator.
+     * @return The lhs object where the result is saved in.
+     */
+    RTCTime &operator-=(const RTCTime &rhs);
+
+    /**
+     * @brief Plus operator.
+     *
+     * Plus operator for adding two RTCTime structs together.
+     * The result will be in seconds.
+     *
+     * @param[in]   rhs    RTCTime struct for the right side of the operator.
+     * @return RTCTime The delta between the two structs in a RTCTime struct.
+     */
+    RTCTime operator+(const RTCTime &rhs) const;
+
+    /**
+     * @brief Plus equals operator.
+     *
+     * Plus equals operator for adding two RTCTime structs together.
+     * The lhs will be the result.
+     *
+     * @param[in]   rhs    RTCTime struct for the right side of the operator.
+     * @return The lhs object where the result is saved in.
+     */
+    RTCTime &operator+=(const RTCTime &rhs);
 };
 
 } // namespace Time
