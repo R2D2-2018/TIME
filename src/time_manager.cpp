@@ -68,7 +68,7 @@ void TimeManager::resetTimer(int timerId) {
 }
 
 void TimeManager::clearTimer(int timerId) {
-    timer = RTCTime();
     timerRunning = false;
+    timer = RTCTime();
 }
 } // namespace Time

@@ -37,6 +37,9 @@ int main() {
         if (someInput == 'e') {
             clock.resetTimer();
         }
+        if (someInput == 'w') {
+            clock.clearTimer();
+        }
         hwlib::cout << (clock.elapsedTime().getTotalSeconds()) << '\t' << clock.getTime().getTotalSeconds() - temp.getTotalSeconds()
                     << hwlib::endl;
     }
