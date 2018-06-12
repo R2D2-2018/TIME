@@ -23,14 +23,22 @@ int main() {
 
     Time::RTCTime temp(43, 32, 21, 1, 14, 5, 19);
     Time::RTCTime temp2(1, 2, 3, 0, 5, 3, 1);
+    Time::RTCTime clear(0, 0, 0, 0, 0, 0, 0);
 
-    hwlib::cout << (temp - temp2) << hwlib::endl;
+    // hwlib::cout << (temp - temp2) << hwlib::endl;
 
     clock.setTime(temp);
     char someInput;
     while (true) {
         hwlib::cin >> someInput;
-        hwlib::cout << (clock.getTime().getTotalSeconds() - temp.getTotalSeconds()) << hwlib::endl;
+        if (someInput == 'q') {
+            clock.setTimer();
+        }
+        if (someInput == 'e') {
+            clock.resetTimer();
+        }
+        hwlib::cout << (clock.elapsedTime().getTotalSeconds()) << '\t' << clock.getTime().getTotalSeconds() - temp.getTotalSeconds()
+                    << hwlib::endl;
     }
     // temp.setTotalSeconds(temp.getTotalSeconds());
 
