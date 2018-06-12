@@ -2,7 +2,7 @@
  * @file
  * @brief     HPP file for the TimeManager class to control the DS3231 RTC
  * module
- * @author    Jasper Smienk
+ * @author    Jasper Smienk, Nick Goris
  * @license   MIT License
  */
 
