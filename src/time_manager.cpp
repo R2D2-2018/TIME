@@ -2,7 +2,7 @@
  * @file
  * @brief     CPP file for the TimeManager class to control the DS3231 RTC
  * module
- * @author    Jasper Smienk
+ * @author    Jasper Smienk, Nick Goris
  * @license   MIT License
  */
 
@@ -68,7 +68,7 @@ void TimeManager::resetTimer(int timerId) {
 }
 
 void TimeManager::clearTimer(int timerId) {
-    timer = RTCTime();
+    resetTimer();
     timerRunning = false;
 }
 } // namespace Time

@@ -2,7 +2,7 @@
  * @file
  * @brief     HPP file for the TimeManager class to control the DS3231 RTC
  * module
- * @author    Jasper Smienk
+ * @author    Jasper Smienk, Nick Goris
  * @license   MIT License
  */
 
@@ -83,7 +83,7 @@ class TimeManager {
      *
      * @param[in]     timerId     Number of timer. (Ignored for now)
      */
-    void setTimer(int timerId);
+    void setTimer(int timerId = 0);
 
     /**
      * @brief Get the elapsed time.
@@ -93,7 +93,7 @@ class TimeManager {
      * @param[in]     timerId     Number of timer. (Ignored for now)
      * @return        RTCTime     A RTCTime struct with the elapsed time.
      */
-    RTCTime elapsedTime(int timerId);
+    RTCTime elapsedTime(int timerId = 0);
 
     /**
      * @brief Resets the timer.
@@ -102,7 +102,7 @@ class TimeManager {
      *
      * @param[in]     timerId     Number of timer. (Ignored for now)
      */
-    void resetTimer(int timerId);
+    void resetTimer(int timerId = 0);
 
     /**
      * @brief Clears the timer.
@@ -111,7 +111,7 @@ class TimeManager {
      *
      * @param[in]     timerId     Number of timer. (Ignored for now)
      */
-    void clearTimer(int timerId);
+    void clearTimer(int timerId = 0);
 };
 } // namespace Time
 
