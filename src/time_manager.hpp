@@ -112,6 +112,15 @@ class TimeManager {
      * @param[in]     timerId     Number of timer. (Ignored for now)
      */
     void clearTimer(int timerId);
+
+    /**
+     * @brief Stops the timer.
+     *
+     * Stops the timer so that it is no longer running, without clearing the time.
+     *
+     * @param[in]     timerId     Number of timer. (Ignored for now)
+     */
+    void stopTimer(int timerId = 0);
 };
 } // namespace Time
 

@@ -71,4 +71,8 @@ void TimeManager::clearTimer(int timerId) {
     timer = RTCTime();
     timerRunning = false;
 }
+
+void TimeManager::stopTimer(int timerId) {
+    timerRunning = false;
+}
 } // namespace Time

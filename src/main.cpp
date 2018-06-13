@@ -24,7 +24,7 @@ int main() {
     Time::RTCTime temp(43, 32, 21, 1, 14, 5, 19);
     Time::RTCTime temp2(1, 2, 3, 0, 5, 3, 1);
 
-    hwlib::cout << (temp - temp2) << hwlib::endl;
+    // hwlib::cout << (temp - temp2) << hwlib::endl;
 
     clock.setTime(temp);
     char someInput;
