@@ -111,7 +111,7 @@ class TimeManager {
      *
      * @param[in]     timerId     Number of timer. (Ignored for now)
      */
-    void clearTimer(int timerId);
+    void clearTimer(int timerId = 0);
 
     /**
      * @brief Stops the timer.

@@ -68,8 +68,8 @@ void TimeManager::resetTimer(int timerId) {
 }
 
 void TimeManager::clearTimer(int timerId) {
-    resetTimer();
-    timerRunning = false;
+    resetTimer(timerId);
+    stopTimer(timerId);
 }
 
 void TimeManager::stopTimer(int timerId) {
