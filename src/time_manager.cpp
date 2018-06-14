@@ -68,7 +68,11 @@ void TimeManager::resetTimer(int timerId) {
 }
 
 void TimeManager::clearTimer(int timerId) {
-    resetTimer();
+    resetTimer(timerId);
+    stopTimer(timerId);
+}
+
+void TimeManager::stopTimer(int timerId) {
     timerRunning = false;
 }
 } // namespace Time
