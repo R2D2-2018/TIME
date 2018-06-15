@@ -12,6 +12,7 @@
 #include <cstdint>
 
 #include "bcd_conversion.hpp"
+#include "object_pool.hpp"
 #include "rtc_time.hpp"
 #include "wrap-hwlib.hpp"
 
