@@ -48,22 +48,34 @@ void TimeManager::clearAlarm(int alarmId) {
 }
 
 void TimeManager::setTimer(int timerId) {
+    // if (!timerRunning) {
+    //     timer = getTime();
+    //     timerRunning = true;
+    // }
     if (!timerRunning) {
-        timer = getTime();
+        timerArray[0] = getTime();
         timerRunning = true;
     }
 }
 
 RTCTime TimeManager::elapsedTime(int timerId) {
+    // if (timerRunning) {
+    //     return (getTime() - timer);
+    // }
+    // return RTCTime();
+
     if (timerRunning) {
-        return (getTime() - timer);
+        return (getTime() - timerArray[0]);
     }
     return RTCTime();
 }
 
 void TimeManager::resetTimer(int timerId) {
+    // if (timerRunning) {
+    //     timer = getTime();
+    // }
     if (timerRunning) {
-        timer = getTime();
+        timerArray[0] = getTime();
     }
 }
 

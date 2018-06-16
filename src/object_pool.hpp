@@ -4,7 +4,7 @@
 //#include <iostream>
 #include <math.h>
 
-namespace Pathfinding {
+// namespace Pathfinding {
 /**
  * @brief Pool-like heap implementation for embedded environments.
  *
@@ -221,6 +221,6 @@ class ObjectPool {
         return os;
     }
 };
-} // namespace Pathfinding
+//} // namespace Pathfinding
 
 #endif // CLASS_POOL_HPP

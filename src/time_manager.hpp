@@ -9,10 +9,11 @@
 #ifndef TIME_MANAGER_HPP
 #define TIME_MANAGER_HPP
 
+#include <array>
 #include <cstdint>
 
 #include "bcd_conversion.hpp"
-#include "object_pool.hpp"
+//#include "object_pool.hpp"
 #include "rtc_time.hpp"
 #include "wrap-hwlib.hpp"
 
@@ -26,7 +27,8 @@ class TimeManager {
     RTCTime alarm;
     bool alarmRunning = false;
 
-    RTCTime timer;
+    // RTCTime timer;
+    std::array<RTCTime, 5> timerArray = {};
     bool timerRunning = false;
 
   public:
