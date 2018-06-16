@@ -7,6 +7,7 @@
  */
 
 #include "time_manager.hpp"
+#include "rtc_time.hpp"
 
 namespace Time {
 TimeManager::TimeManager(hwlib::pin_oc &scl, hwlib::pin_oc &sda)
@@ -48,34 +49,26 @@ void TimeManager::clearAlarm(int alarmId) {
 }
 
 void TimeManager::setTimer(int timerId) {
-    // if (!timerRunning) {
-    //     timer = getTime();
-    //     timerRunning = true;
-    // }
-    if (!timerRunning) {
-        timerArray[0] = getTime();
-        timerRunning = true;
+    if (!activeTimers[timerId]) {
+        timerArray[timerId] = getTime();
+        activeTimers[timerId] = true;
     }
 }
 
-RTCTime TimeManager::elapsedTime(int timerId) {
-    // if (timerRunning) {
-    //     return (getTime() - timer);
-    // }
-    // return RTCTime();
+std::array<RTCTime, 5> TimeManager::getTimerArray() {
+    return timerArray;
+}
 
-    if (timerRunning) {
-        return (getTime() - timerArray[0]);
+RTCTime TimeManager::elapsedTime(int timerId) {
+    if (activeTimers[timerId]) {
+        return (getTime() - timerArray[timerId]);
     }
     return RTCTime();
 }
 
 void TimeManager::resetTimer(int timerId) {
-    // if (timerRunning) {
-    //     timer = getTime();
-    // }
-    if (timerRunning) {
-        timerArray[0] = getTime();
+    if (activeTimers[timerId]) {
+        timerArray[timerId] = getTime();
     }
 }
 
@@ -85,6 +78,6 @@ void TimeManager::clearTimer(int timerId) {
 }
 
 void TimeManager::stopTimer(int timerId) {
-    timerRunning = false;
+    activeTimers[timerId] = false;
 }
 } // namespace Time

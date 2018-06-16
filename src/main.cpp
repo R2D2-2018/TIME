@@ -27,20 +27,39 @@ int main() {
     // hwlib::cout << (temp - temp2) << hwlib::endl;
 
     clock.setTime(temp);
+    auto timers = clock.getTimerArray();
+    uint16_t timerCounter = 0;
     char someInput;
     while (true) {
         hwlib::cin >> someInput;
         if (someInput == 'q') {
-            clock.setTimer();
+            clock.setTimer(timerCounter);
         }
         if (someInput == 'e') {
-            clock.resetTimer();
+            clock.resetTimer(timerCounter);
         }
         if (someInput == 'w') {
-            clock.clearTimer();
+            clock.clearTimer(timerCounter);
         }
-        hwlib::cout << (clock.elapsedTime().getTotalSeconds()) << '\t' << clock.getTime().getTotalSeconds() - temp.getTotalSeconds()
-                    << hwlib::endl;
+        if (someInput == 'p') {
+            if (timerCounter < 4) {
+                timerCounter++;
+            }
+            hwlib::cout << timerCounter + 1 << hwlib::endl;
+        }
+        if (someInput == 'o') {
+            if (timerCounter > 0) {
+                timerCounter--;
+            }
+            hwlib::cout << timerCounter + 1 << hwlib::endl;
+        }
+
+        hwlib::cout << "Current time is: \t" << clock.getTime().getTotalSeconds() - temp.getTotalSeconds() << hwlib::endl;
+
+        for (uint16_t i = 0; i < timers.size(); i++) {
+            hwlib::cout << (clock.elapsedTime(i).getTotalSeconds()) << '\t';
+        }
+        hwlib::cout << hwlib::endl;
     }
     // temp.setTotalSeconds(temp.getTotalSeconds());
 
