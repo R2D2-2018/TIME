@@ -35,21 +35,23 @@ int main() {
         if (someInput == 'q') {
             clock.setTimer(timerCounter);
         }
-        if (someInput == 'e') {
+        if (someInput == 'w') {
             clock.resetTimer(timerCounter);
         }
-        if (someInput == 'w') {
+        if (someInput == 'e') {
             clock.clearTimer(timerCounter);
         }
-        if (someInput == 'p') {
-            if (timerCounter < 4) {
-                timerCounter++;
-            }
-            hwlib::cout << timerCounter + 1 << hwlib::endl;
-        }
+
         if (someInput == 'o') {
             if (timerCounter > 0) {
                 timerCounter--;
+            }
+            hwlib::cout << timerCounter + 1 << hwlib::endl;
+        }
+
+        if (someInput == 'p') {
+            if (timerCounter < 4) {
+                timerCounter++;
             }
             hwlib::cout << timerCounter + 1 << hwlib::endl;
         }
