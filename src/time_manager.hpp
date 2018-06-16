@@ -30,7 +30,7 @@ class TimeManager {
     // RTCTime timer;
     static const uint16_t TIMER_AMOUNT = 5;
     std::array<RTCTime, TIMER_AMOUNT> timerArray = {};
-    std::array<bool, TIMER_AMOUNT> activeTimers = {0};
+    std::array<bool, TIMER_AMOUNT> activeTimers = {{0}};
     bool timerRunning = false;
 
   public:
