@@ -78,7 +78,7 @@ class TimeManager {
      *
      * @return     std::array<RTCTime, ALARM_AMOUNT>  Alarm array
      */
-    std::array<RTCTime, ALARM_AMOUNT> getAlarmArray();
+    uint16_t getAlarmArraySize();
 
     /**
      * @brief Clear the alarm.
