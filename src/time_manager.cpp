@@ -55,7 +55,7 @@ void TimeManager::setTimer(int timerId) {
     }
 }
 
-uint16_t TimeManager::getTimerArraySize() {
+uint16_t TimeManager::getTimerArraySize() const {
     return timerArray.size();
 }
 

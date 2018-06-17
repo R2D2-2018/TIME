@@ -97,7 +97,7 @@ class TimeManager {
      *
      * @param[out]     std::array<RTCTime, TIMER_AMOUNT>  Timer array
      */
-    uint16_t getTimerArraySize();
+    uint16_t getTimerArraySize() const;
 
     /**
      * @brief Get the elapsed time.
