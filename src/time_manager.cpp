@@ -39,12 +39,12 @@ void TimeManager::setTime(RTCTime timeAndDate) {
 }
 
 void TimeManager::setAlarm(int alarmId, RTCTime newAlarm) {
-    alarm = newAlarm;
-    alarmRunning = true;
+    alarmArray[alarmId] = newAlarm;
+    activeAlarms[alarmId] = true;
 }
 
 void TimeManager::clearAlarm(int alarmId) {
-    alarmRunning = false;
+    activeAlarms[alarmId] = false;
 }
 
 void TimeManager::setTimer(int timerId) {
