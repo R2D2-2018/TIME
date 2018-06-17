@@ -9,9 +9,11 @@
 #ifndef TIME_MANAGER_HPP
 #define TIME_MANAGER_HPP
 
+#include <array>
 #include <cstdint>
 
 #include "bcd_conversion.hpp"
+//#include "object_pool.hpp"
 #include "rtc_time.hpp"
 #include "wrap-hwlib.hpp"
 
@@ -25,8 +27,11 @@ class TimeManager {
     RTCTime alarm;
     bool alarmRunning = false;
 
-    RTCTime timer;
-    bool timerRunning = false;
+    // RTCTime timer;
+    static const uint16_t TIMER_AMOUNT = 5;
+    std::array<RTCTime, TIMER_AMOUNT> timerArray = {{getTime()}};
+    std::array<bool, TIMER_AMOUNT> activeTimers = {{false}};
+    // bool timerRunning = false;
 
   public:
     /**
@@ -81,46 +86,55 @@ class TimeManager {
      *
      * Set the timer time to the current time on the RTC module.
      *
-     * @param[in]     timerId     Number of timer. (Ignored for now)
+     * @param[in]     timerId     Number of timer.
      */
-    void setTimer(int timerId = 0);
+    void setTimer(int timerId);
+
+    /**
+     * @brief Returns the timer container.
+     *
+     * Returns the timer container
+     *
+     * @param[out]     std::array<RTCTime, TIMER_AMOUNT>  Timer array
+     */
+    uint16_t getTimerArraySize() const;
 
     /**
      * @brief Get the elapsed time.
      *
      * Get the elapsed time of the timer since the timer was set.
      *
-     * @param[in]     timerId     Number of timer. (Ignored for now)
+     * @param[in]     timerId     Number of timer.
      * @return        RTCTime     A RTCTime struct with the elapsed time.
      */
-    RTCTime elapsedTime(int timerId = 0);
+    RTCTime elapsedTime(int timerId);
 
     /**
      * @brief Resets the timer.
      *
      * Resets the timer to the current time on the RTC module.
      *
-     * @param[in]     timerId     Number of timer. (Ignored for now)
+     * @param[in]     timerId     Number of timer.
      */
-    void resetTimer(int timerId = 0);
+    void resetTimer(int timerId);
 
     /**
      * @brief Clears the timer.
      *
      * Clears the time so that it is no longer running.
      *
-     * @param[in]     timerId     Number of timer. (Ignored for now)
+     * @param[in]     timerId     Number of timer.
      */
-    void clearTimer(int timerId = 0);
+    void clearTimer(int timerId);
 
     /**
      * @brief Stops the timer.
      *
      * Stops the timer so that it is no longer running, without clearing the time.
      *
-     * @param[in]     timerId     Number of timer. (Ignored for now)
+     * @param[in]     timerId     Number of timer.
      */
-    void stopTimer(int timerId = 0);
+    void stopTimer(int timerId);
 };
 } // namespace Time
 
