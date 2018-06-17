@@ -47,6 +47,10 @@ void TimeManager::clearAlarm(int alarmId) {
     activeAlarms[alarmId] = false;
 }
 
+std::array<RTCTime, ALARM_AMOUNT> TimeManager::getAlarmArray() {
+    return alarmArray;
+}
+
 bool TimeManager::checkAlarm(int alarmId) {
     if (activeAlarms[alarmId]) {
         if (alarmArray[alarmId] <= getTime()) {

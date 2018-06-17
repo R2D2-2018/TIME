@@ -25,6 +25,8 @@ int main() {
     Time::RTCTime temp2(1, 2, 3, 0, 5, 3, 1);
 
     clock.setTime(temp);
+    auto alarms = clock.getAlarmArray();
+    uint16_t alarmCounter = 0;
     char someInput;
     while (true) {
         hwlib::cin >> someInput;
