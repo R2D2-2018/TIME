@@ -9,6 +9,7 @@
 #ifndef TIME_MANAGER_HPP
 #define TIME_MANAGER_HPP
 
+#include <array>
 #include <cstdint>
 
 #include "bcd_conversion.hpp"
@@ -22,7 +23,10 @@ class TimeManager {
     hwlib::pin_oc &sda;
     hwlib::i2c_bus_bit_banged_scl_sda realTimeClock;
 
-    RTCTime alarm;
+    // RTCTime alarm;
+    static const uint16_t ALARM_AMOUNT = 5;
+    std::array<RTCTime, ALARM_AMOUNT> alarmArray = {{getTime()}};
+    std::array<bool, ALARM_AMOUNT> activeAlarms = {{false}};
     bool alarmRunning = false;
 
     RTCTime timer;
@@ -66,6 +70,15 @@ class TimeManager {
      * @param[in]     newAlarm    A RTCTime struct with the new alarm.
      */
     void setAlarm(int alarmId, RTCTime newAlarm);
+
+    /**
+     * @brief Returns the alarm container.
+     *
+     * Returns the alarm container
+     *
+     * @param[out]     std::array<RTCTime, ALARM_AMOUNT>  Alarm array
+     */
+    std::array<RTCTime, ALARM_AMOUNT> getAlarmArray();
 
     /**
      * @brief Clear the alarm.
