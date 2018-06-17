@@ -30,8 +30,8 @@ class TimeManager {
     // RTCTime timer;
     static const uint16_t TIMER_AMOUNT = 5;
     std::array<RTCTime, TIMER_AMOUNT> timerArray = {{getTime()}};
-    std::array<bool, TIMER_AMOUNT> activeTimers = {{0}};
-    bool timerRunning = false;
+    std::array<bool, TIMER_AMOUNT> activeTimers = {{false}};
+    // bool timerRunning = false;
 
   public:
     /**
@@ -97,7 +97,7 @@ class TimeManager {
      *
      * @param[out]     std::array<RTCTime, 5>     Timer array
      */
-    std::array<RTCTime, 5> getTimerArray();
+    std::array<RTCTime, TIMER_AMOUNT> getTimerArray();
 
     /**
      * @brief Get the elapsed time.
