@@ -95,7 +95,7 @@ class TimeManager {
      *
      * Returns the timer container
      *
-     * @param[out]     std::array<RTCTime, 5>     Timer array
+     * @param[out]     std::array<RTCTime, TIMER_AMOUNT>  Timer array
      */
     std::array<RTCTime, TIMER_AMOUNT> getTimerArray();
 
