@@ -21,14 +21,9 @@ int main() {
 
     auto clock = Time::TimeManager(scl, sda);
 
-    Time::RTCTime temp(43, 32, 21, 1, 14, 5, 19);
-    Time::RTCTime temp2(1, 2, 3, 0, 5, 3, 1);
-
-    // hwlib::cout << (temp - temp2) << hwlib::endl;
-
-    clock.setTime(temp);
     auto timersSize = clock.getTimerArraySize();
     uint16_t timerCounter = 0;
+
     char someInput;
     while (true) {
         hwlib::cin >> someInput;
@@ -48,7 +43,6 @@ int main() {
             }
             hwlib::cout << timerCounter + 1 << hwlib::endl;
         }
-
         if (someInput == 'p') {
             if (timerCounter < 4) {
                 timerCounter++;
@@ -56,24 +50,12 @@ int main() {
             hwlib::cout << timerCounter + 1 << hwlib::endl;
         }
 
-        hwlib::cout << "Current time is: \t" << clock.getTime().getTotalSeconds() - temp.getTotalSeconds() << hwlib::endl;
+        hwlib::cout << "Current second count is: \t" << clock.getTime().getTotalSeconds() << hwlib::endl;
 
         for (uint16_t i = 0; i < timersSize; i++) {
             hwlib::cout << (clock.elapsedTime(i).getTotalSeconds()) << '\t';
         }
         hwlib::cout << hwlib::endl;
     }
-    // temp.setTotalSeconds(temp.getTotalSeconds());
-
-    /*
-     while (true) {
-         Time::RTCTime time = clock.getTime();
-         hwlib::cout << static_cast<int>(time.getHours()) << ":" << static_cast<int>(time.getMinutes()) << ":"
-                     << static_cast<int>(time.getSeconds()) << " - " << static_cast<int>(time.getDayOfTheWeek()) << " "
-                     << static_cast<int>(time.getDayOfTheMonth()) << "/" << static_cast<int>(time.getMonth()) << "/"
-                     << static_cast<int>(time.getYear()) << hwlib::endl;
-         hwlib::wait_ms(100);
-     }
-     */
     return 0;
 }
