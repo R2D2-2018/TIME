@@ -47,6 +47,17 @@ void TimeManager::clearAlarm(int alarmId) {
     activeAlarms[alarmId] = false;
 }
 
+bool TimeManager::checkAlarm(int alarmId) {
+    if (activeAlarms[alarmId]) {
+        if (alarmArray[alarmId] <= getTime()) {
+            hwlib::cout << "BEEP BEEP" << hwlib::endl;
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
 void TimeManager::setTimer(int timerId) {
     if (!timerRunning) {
         timer = getTime();

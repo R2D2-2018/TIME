@@ -66,7 +66,7 @@ class TimeManager {
      *
      * Set the alarm time to a new time.
      *
-     * @param[in]     alarmId     Number of alarm. (Ignored for now)
+     * @param[in]     alarmId     Number of alarm.
      * @param[in]     newAlarm    A RTCTime struct with the new alarm.
      */
     void setAlarm(int alarmId, RTCTime newAlarm);
@@ -76,7 +76,7 @@ class TimeManager {
      *
      * Returns the alarm container
      *
-     * @param[out]     std::array<RTCTime, ALARM_AMOUNT>  Alarm array
+     * @return     std::array<RTCTime, ALARM_AMOUNT>  Alarm array
      */
     std::array<RTCTime, ALARM_AMOUNT> getAlarmArray();
 
@@ -85,9 +85,21 @@ class TimeManager {
      *
      * Resets the alarm so that is doesn't run anymore.
      *
-     * @param[in]     alarmId     Number of alarm. (Ignored for now)
+     * @param[in]     alarmId     Number of alarm.
      */
     void clearAlarm(int alarmId);
+
+    /**
+     * @brief Checks if an alarm has expired
+     *
+     * This function checks if an alarm is running (if not it returns false),
+     * and if it is, it returns whether or not the current time is equal to
+     * or has surpassed the set time for the alarm.
+     *
+     * @param[in]     alarmId     Number of alarm.
+     * @return        bool        Whether or not the alarm has expired
+     */
+    bool checkAlarm(int alarmId);
 
     /**
      * @brief Set the timer.
