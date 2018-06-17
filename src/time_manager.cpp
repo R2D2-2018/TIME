@@ -55,8 +55,8 @@ void TimeManager::setTimer(int timerId) {
     }
 }
 
-std::array<RTCTime, 5> TimeManager::getTimerArray() {
-    return timerArray;
+uint16_t TimeManager::getTimerArraySize() {
+    return timerArray.size();
 }
 
 RTCTime TimeManager::elapsedTime(int timerId) {

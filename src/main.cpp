@@ -27,7 +27,7 @@ int main() {
     // hwlib::cout << (temp - temp2) << hwlib::endl;
 
     clock.setTime(temp);
-    auto timers = clock.getTimerArray();
+    auto timersSize = clock.getTimerArraySize();
     uint16_t timerCounter = 0;
     char someInput;
     while (true) {
@@ -58,7 +58,7 @@ int main() {
 
         hwlib::cout << "Current time is: \t" << clock.getTime().getTotalSeconds() - temp.getTotalSeconds() << hwlib::endl;
 
-        for (uint16_t i = 0; i < timers.size(); i++) {
+        for (uint16_t i = 0; i < timersSize; i++) {
             hwlib::cout << (clock.elapsedTime(i).getTotalSeconds()) << '\t';
         }
         hwlib::cout << hwlib::endl;
