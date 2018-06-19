@@ -84,10 +84,24 @@ int main() {
             break;
 
         case TimeManagerStates::TIMER:
-            hwlib::cout << "Timer selected. Press 3 to return to main menu" << hwlib::endl;
+            hwlib::cout << "Timer selected.Press 1 to cycle through timers, press 2 to start a timer \n Press 4 to reset a timer, "
+                           "press 5 to clear a timer \n Press 3 to return to main menu"
+                        << hwlib::endl;
             hwlib::cin >> someInput;
+            if (someInput == '1') {
+                timerCounter++;
+            }
+            if (someInput == '2') {
+                clock.setTimer(timerCounter);
+            }
             if (someInput == '3') {
                 timeMngrState = TimeManagerStates::MAIN_MENU;
+            }
+            if (someInput == '4') {
+                clock.resetTimer(timerCounter);
+            }
+            if (someInput == '5') {
+                clock.clearTimer(timerCounter);
             }
             break;
 
