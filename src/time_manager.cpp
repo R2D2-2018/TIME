@@ -7,10 +7,12 @@
  */
 
 #include "time_manager.hpp"
+#include "rtc_time.hpp"
 
 namespace Time {
 TimeManager::TimeManager(hwlib::pin_oc &scl, hwlib::pin_oc &sda)
     : scl(scl), sda(sda), realTimeClock(hwlib::i2c_bus_bit_banged_scl_sda(scl, sda)) {
+    setTime(0);
 }
 
 RTCTime TimeManager::getTime() {
@@ -63,22 +65,26 @@ bool TimeManager::checkAlarm(int alarmId) {
 }
 
 void TimeManager::setTimer(int timerId) {
-    if (!timerRunning) {
-        timer = getTime();
-        timerRunning = true;
+    if (!activeTimers[timerId]) {
+        timerArray[timerId] = getTime();
+        activeTimers[timerId] = true;
     }
 }
 
+uint16_t TimeManager::getTimerArraySize() const {
+    return timerArray.size();
+}
+
 RTCTime TimeManager::elapsedTime(int timerId) {
-    if (timerRunning) {
-        return (getTime() - timer);
+    if (activeTimers[timerId]) {
+        return (getTime() - timerArray[timerId]);
     }
     return RTCTime();
 }
 
 void TimeManager::resetTimer(int timerId) {
-    if (timerRunning) {
-        timer = getTime();
+    if (activeTimers[timerId]) {
+        timerArray[timerId] = getTime();
     }
 }
 
@@ -88,6 +94,6 @@ void TimeManager::clearTimer(int timerId) {
 }
 
 void TimeManager::stopTimer(int timerId) {
-    timerRunning = false;
+    activeTimers[timerId] = false;
 }
 } // namespace Time
