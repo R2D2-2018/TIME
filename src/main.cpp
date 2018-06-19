@@ -31,30 +31,33 @@ int main() {
 
     enum TimeManagerStates timeMngrState;
 
+    timeMngrState = TimeManagerStates::MAIN_MENU;
+
+    char someInput;
+
     while (true) {
         auto now = clock.getTime();
-        timeMngrState = TimeManagerStates::MAIN_MENU;
 
         switch (timeMngrState) {
 
         case TimeManagerStates::MAIN_MENU:
-            mainMenu(clock, timeMngrState);
+            mainMenu(clock, &timeMngrState);
             break;
 
         case TimeManagerStates::TIMER_SELECT:
-            timerSelect(clock, timeMngrState);
+            timerSelect(clock, &timeMngrState);
             break;
 
         case TimeManagerStates::ALARM_SELECT:
-            alarmSelect(clock, timeMngrState);
+            alarmSelect(clock, &timeMngrState);
             break;
 
         case TimeManagerStates::TIMER:
-            timerMenu(clock, timeMngrState, timerCounter);
+            timerMenu(clock, &timeMngrState, timerCounter);
             break;
 
         case TimeManagerStates::ALARM:
-            alarmMenu(clock, timeMngrState, alarmCounter);
+            alarmMenu(clock, &timeMngrState, alarmCounter);
             break;
 
         case TimeManagerStates::SET_ALARM:
@@ -63,33 +66,33 @@ int main() {
         }
     }
 
-    // char someInput;
-    // while (true) {
-    //     hwlib::cin >> someInput;
-    //     if (someInput == 'q') {
-    //         clock.setTimer(timerCounter);
-    //     }
-    //     if (someInput == 'w') {
-    //         clock.resetTimer(timerCounter);
-    //     }
-    //     if (someInput == 'e') {
-    //         clock.clearTimer(timerCounter);
-    //     }
+    //  char someInput;
+    //  while (true) {
+    //      hwlib::cin >> someInput;
+    //      if (someInput == 'q') {
+    //          clock.setTimer(timerCounter);
+    //      }
+    //      if (someInput == 'w') {
+    //          clock.resetTimer(timerCounter);
+    //      }
+    //      if (someInput == 'e') {
+    //          clock.clearTimer(timerCounter);
+    //      }
 
-    //     if (someInput == 'o') {
-    //         if (timerCounter > 0) {
-    //             timerCounter--;
-    //         }
-    //         hwlib::cout << timerCounter + 1 << hwlib::endl;
-    //     }
-    //     if (someInput == 'p') {
-    //         if (timerCounter < 4) {
-    //             timerCounter++;
-    //         }
-    //         hwlib::cout << timerCounter + 1 << hwlib::endl;
-    //     }
+    //      if (someInput == 'o') {
+    //          if (timerCounter > 0) {
+    //              timerCounter--;
+    //          }
+    //          hwlib::cout << timerCounter + 1 << hwlib::endl;
+    //      }
+    //      if (someInput == 'p') {
+    //          if (timerCounter < 4) {
+    //              timerCounter++;
+    //          }
+    //          hwlib::cout << timerCounter + 1 << hwlib::endl;
+    //      }
 
-    //     hwlib::cout << "Current second count is: \t" << clock.getTime().getTotalSeconds() << hwlib::endl;
+    //      hwlib::cout << "Current second count is: \t" << clock.getTime().getTotalSeconds() << hwlib::endl;
 
     //     for (uint16_t i = 0; i < timersSize; i++) {
     //         hwlib::cout << (clock.elapsedTime(i).getTotalSeconds()) << '\t';
