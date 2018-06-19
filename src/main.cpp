@@ -8,6 +8,7 @@
 
 #include "wrap-hwlib.hpp"
 
+#include "enumSTates.hpp"
 #include "rtc_time.hpp"
 #include "time_manager.hpp"
 
@@ -20,13 +21,15 @@ int main() {
     auto sda = hwlib::target::pin_oc(hwlib::target::pins::sda);
 
     auto clock = Time::TimeManager(scl, sda);
-
     clock.setTime(0);
+
     auto alarmsSize = clock.getAlarmArraySize();
     uint16_t alarmCounter = 0;
 
     auto timersSize = clock.getTimerArraySize();
     uint16_t timerCounter = 0;
+
+    enum timeManagerStates timeManagerState;
 
     char someInput;
     while (true) {
