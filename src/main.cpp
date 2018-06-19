@@ -106,11 +106,27 @@ int main() {
             break;
 
         case TimeManagerStates::ALARM:
-            hwlib::cout << "Alarm selected. Press 3 to return to main menu" << hwlib::endl;
+            hwlib::cout
+                << "Alarm selected.Press 1 to cycle through alarms, press 2 to start an alarms \n Press 4 to clear an alarms, "
+                   "\n Press 3 to return to main menu"
+                << hwlib::endl;
             hwlib::cin >> someInput;
+            if (someInput == '1') {
+                alarmCounter++;
+            }
+            if (someInput == '2') {
+                timeMngrState = TimeManagerStates::SET_ALARM;
+            }
             if (someInput == '3') {
                 timeMngrState = TimeManagerStates::MAIN_MENU;
             }
+            if (someInput == '4') {
+                clock.clearAlarm(alarmCounter);
+            }
+            break;
+
+        case TimeManagerStates::SET_ALARM:
+            hwlib::cout << "Setting an alarm" << hwlib::endl;
             break;
         }
     }
