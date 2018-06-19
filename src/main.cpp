@@ -8,7 +8,7 @@
 
 #include "wrap-hwlib.hpp"
 
-#include "enumStates.hpp"
+#include "enum_states.hpp"
 #include "rtc_time.hpp"
 #include "time_manager.hpp"
 
@@ -29,17 +29,17 @@ int main() {
     auto timersSize = clock.getTimerArraySize();
     uint16_t timerCounter = 0;
 
-    enum timeManagerStates timeManagerState;
+    enum TimeManagerStates timeMngrState;
 
     char someInput;
 
     while (true) {
         auto now = clock.getTime();
-        timeManagerState = timeManagerStates::MAIN_MENU;
+        timeMngrState = TimeManagerStates::MAIN_MENU;
 
-        switch (timeManagerState) {
+        switch (timeMngrState) {
 
-        case timeManagerStates::MAIN_MENU:
+        case TimeManagerStates::MAIN_MENU:
             hwlib::cout << clock.getTime().getTotalSeconds() << hwlib::endl;
             hwlib::cout << "Press 1 to cycle through menu, press 2 to select menu, press 3 to cancel" << hwlib::endl;
 
@@ -51,51 +51,51 @@ int main() {
             hwlib::cin >> someInput;
 
             if (someInput == '1') {
-                timeManagerState = timeManagerStates::TIMER_SELECT;
+                timeMngrState = TimeManagerStates::TIMER_SELECT;
             }
             break;
 
-        case timeManagerStates::TIMER_SELECT:
+        case TimeManagerStates::TIMER_SELECT:
             hwlib::cout << "Timer menu? Press 2 to confirm, press 3 to cancel" << hwlib::endl;
             hwlib::cin >> someInput;
             if (someInput == '1') {
-                timeManagerState = timeManagerStates::ALARM_SELECT;
+                timeMngrState = TimeManagerStates::ALARM_SELECT;
             }
             if (someInput == '2') {
-                timeManagerState = timeManagerStates::TIMER;
+                timeMngrState = TimeManagerStates::TIMER;
             }
             if (someInput == '3') {
-                timeManagerState = timeManagerStates::MAIN_MENU;
+                timeMngrState = TimeManagerStates::MAIN_MENU;
             }
             break;
 
-        case timeManagerStates::ALARM_SELECT:
+        case TimeManagerStates::ALARM_SELECT:
             hwlib::cout << "Alarm menu? Press 2 to confirm, press 3 to cancel" << hwlib::endl;
             hwlib::cin >> someInput;
             if (someInput == '1') {
-                timeManagerState = timeManagerStates::TIMER_SELECT;
+                timeMngrState = TimeManagerStates::TIMER_SELECT;
             }
             if (someInput == '2') {
-                timeManagerState = timeManagerStates::ALARM;
+                timeMngrState = TimeManagerStates::ALARM;
             }
             if (someInput == '3') {
-                timeManagerState = timeManagerStates::MAIN_MENU;
+                timeMngrState = TimeManagerStates::MAIN_MENU;
             }
             break;
 
-        case timeManagerStates::TIMER:
+        case TimeManagerStates::TIMER:
             hwlib::cout << "Timer selected. Press 3 to return to main menu" << hwlib::endl;
             hwlib::cin >> someInput;
             if (someInput == '3') {
-                timeManagerState = timeManagerStates::MAIN_MENU;
+                timeMngrState = TimeManagerStates::MAIN_MENU;
             }
             break;
 
-        case timeManagerStates::ALARM:
+        case TimeManagerStates::ALARM:
             hwlib::cout << "Alarm selected. Press 3 to return to main menu" << hwlib::endl;
             hwlib::cin >> someInput;
             if (someInput == '3') {
-                timeManagerState = timeManagerStates::MAIN_MENU;
+                timeMngrState = TimeManagerStates::MAIN_MENU;
             }
             break;
         }

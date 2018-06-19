@@ -1,7 +1,7 @@
 #ifndef ENUMSTATES_HPP
 #define ENUMSTATES_HPP
 
-enum class timeManagerStates {
+enum class TimeManagerStates {
     MAIN_MENU,    // Main Menu
     TIMER_SELECT, // Main menu select Timer
     ALARM_SELECT, // Main menu select Alarm
