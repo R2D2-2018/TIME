@@ -49,65 +49,76 @@ class StateMachine {
     }
 
     void setTime() {
+        bool finished = false;
         Time::RTCTime temp(0, 0, 0, 0, 0, 1, 18);
         hwlib::cout << "Press 1 to increase the year, press 2 to decrease the year, press 4 to confirm and press 3 to cancel"
                     << hwlib::endl;
         hwlib::cout << temp.getYear() << hwlib::endl;
         hwlib::cin >> someInput;
 
-        while (someInput == '1') {
-            temp.setYear(temp.getYear() + 1);
-            hwlib::cout << temp.getYear() << hwlib::endl;
-            hwlib::cin >> someInput;
-        }
-        if (someInput == '2') {
-            temp.setYear(temp.getYear() - 1);
-            hwlib::cout << temp.getYear() << hwlib::endl;
-        }
-        if (someInput == '3') {
-            timeMngrState = TimeManagerStates::MAIN_MENU;
-        }
-        if (someInput == '4') {
-            hwlib::cout << "Year set. Set month:" << hwlib::endl;
-            hwlib::cout << "Press 1 to cycle through months, press 2 to confirm and press 3 to cancel" << hwlib::endl;
-            hwlib::cout << temp.getMonth() << hwlib::endl;
-            hwlib::cin >> someInput;
+        while (!finished) {
             if (someInput == '1') {
-                temp.setMonth(temp.getMonth() + 1);
-                hwlib::cout << temp.getMonth() << hwlib::endl;
+                temp.setYear(temp.getYear() + 1);
+                hwlib::cout << temp.getYear() << hwlib::endl;
+                hwlib::cin >> someInput;
             }
             if (someInput == '2') {
-                hwlib::cout << "Month set, set date:" << hwlib::endl;
-                hwlib::cout << "Press 1 to cycle through days, press 2 to confirm and press 3 to cancel" << hwlib::endl;
-                hwlib::cout << temp.getDayOfTheMonth() << hwlib::endl;
+                temp.setYear(temp.getYear() - 1);
+                hwlib::cout << temp.getYear() << hwlib::endl;
+                hwlib::cin >> someInput;
+            }
+            if (someInput == '3') {
+                timeMngrState = TimeManagerStates::MAIN_MENU;
+                return;
+            }
+            if (someInput == '4') {
+                hwlib::cout << "Year set. Set month:" << hwlib::endl;
+                hwlib::cout << "Press 1 to cycle through months, press 2 to confirm and press 3 to cancel" << hwlib::endl;
+                hwlib::cout << temp.getMonth() << hwlib::endl;
                 hwlib::cin >> someInput;
                 if (someInput == '1') {
-                    temp.setDayOfTheMonth(temp.getDayOfTheMonth() + 1);
-                    hwlib::cout << temp.getDayOfTheMonth() << hwlib::endl;
+                    temp.setMonth(temp.getMonth() + 1);
+                    hwlib::cout << temp.getMonth() << hwlib::endl;
                 }
                 if (someInput == '2') {
-                    hwlib::cout << "Day set, set current hour:" << hwlib::endl;
-                    hwlib::cout << "Press 1 to cycle through hours, press 2 to confirm and press 3 to cancel" << hwlib::endl;
-                    hwlib::cout << temp.getHours() << hwlib::endl;
+                    hwlib::cout << "Month set, set date:" << hwlib::endl;
+                    hwlib::cout << "Press 1 to cycle through days, press 2 to confirm and press 3 to cancel" << hwlib::endl;
+                    hwlib::cout << temp.getDayOfTheMonth() << hwlib::endl;
                     hwlib::cin >> someInput;
                     if (someInput == '1') {
-                        temp.setHours(temp.getHours() + 1);
-                        hwlib::cout << temp.getHours() << hwlib::endl;
+                        temp.setDayOfTheMonth(temp.getDayOfTheMonth() + 1);
+                        hwlib::cout << temp.getDayOfTheMonth() << hwlib::endl;
                     }
                     if (someInput == '2') {
-                        hwlib::cout << "Hours set, set minutes:" << hwlib::endl;
-                        hwlib::cout << "Press 1 to cycle through minutes, press 2 to confirm and press 3 to cancel" << hwlib::endl;
-                        hwlib::cout << temp.getMinutes() << hwlib::endl;
+                        hwlib::cout << "Day set, set current hour:" << hwlib::endl;
+                        hwlib::cout << "Press 1 to cycle through hours, press 2 to confirm and press 3 to cancel" << hwlib::endl;
+                        hwlib::cout << temp.getHours() << hwlib::endl;
                         hwlib::cin >> someInput;
                         if (someInput == '1') {
-                            temp.setMinutes(temp.getMinutes() + 1);
-                            hwlib::cout << temp.getMinutes() << hwlib::endl;
+                            temp.setHours(temp.getHours() + 1);
+                            hwlib::cout << temp.getHours() << hwlib::endl;
                         }
                         if (someInput == '2') {
-                            hwlib::cout << "Time setting is finished with this time:\n " << temp.getHours() << ':'
-                                        << temp.getMinutes() << '\t' << temp.getDayOfTheMonth() << '/' << temp.getMonth() << '/'
-                                        << temp.getYear() << hwlib::endl;
-                            hwlib::cout << "Returning to main menu" << hwlib::endl;
+                            hwlib::cout << "Hours set, set minutes:" << hwlib::endl;
+                            hwlib::cout << "Press 1 to cycle through minutes, press 2 to confirm and press 3 to cancel"
+                                        << hwlib::endl;
+                            hwlib::cout << temp.getMinutes() << hwlib::endl;
+                            hwlib::cin >> someInput;
+                            if (someInput == '1') {
+                                temp.setMinutes(temp.getMinutes() + 1);
+                                hwlib::cout << temp.getMinutes() << hwlib::endl;
+                            }
+                            if (someInput == '2') {
+                                hwlib::cout << "Time setting is finished with this time:\n " << temp.getHours() << ':'
+                                            << temp.getMinutes() << '\t' << temp.getDayOfTheMonth() << '/' << temp.getMonth() << '/'
+                                            << temp.getYear() << hwlib::endl;
+                                hwlib::cout << "Returning to main menu" << hwlib::endl;
+                                finished = true;
+                            }
+                            if (someInput == '3') {
+                                timeMngrState = TimeManagerStates::MAIN_MENU;
+                                return;
+                            }
                         }
                         if (someInput == '3') {
                             timeMngrState = TimeManagerStates::MAIN_MENU;
@@ -123,10 +134,6 @@ class StateMachine {
                     timeMngrState = TimeManagerStates::MAIN_MENU;
                     return;
                 }
-            }
-            if (someInput == '3') {
-                timeMngrState = TimeManagerStates::MAIN_MENU;
-                return;
             }
         }
         timeMngrState = TimeManagerStates::MAIN_MENU;
