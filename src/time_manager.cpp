@@ -2,15 +2,17 @@
  * @file
  * @brief     CPP file for the TimeManager class to control the DS3231 RTC
  * module
- * @author    Jasper Smienk
+ * @author    Jasper Smienk, Nick Goris
  * @license   MIT License
  */
 
 #include "time_manager.hpp"
+#include "rtc_time.hpp"
 
 namespace Time {
 TimeManager::TimeManager(hwlib::pin_oc &scl, hwlib::pin_oc &sda)
     : scl(scl), sda(sda), realTimeClock(hwlib::i2c_bus_bit_banged_scl_sda(scl, sda)) {
+    setTime(0);
 }
 
 RTCTime TimeManager::getTime() {
@@ -48,27 +50,35 @@ void TimeManager::clearAlarm(int alarmId) {
 }
 
 void TimeManager::setTimer(int timerId) {
-    if (!timerRunning) {
-        timer = getTime();
-        timerRunning = true;
+    if (!activeTimers[timerId]) {
+        timerArray[timerId] = getTime();
+        activeTimers[timerId] = true;
     }
 }
 
+uint16_t TimeManager::getTimerArraySize() const {
+    return timerArray.size();
+}
+
 RTCTime TimeManager::elapsedTime(int timerId) {
-    if (timerRunning) {
-        return (getTime() - timer);
+    if (activeTimers[timerId]) {
+        return (getTime() - timerArray[timerId]);
     }
     return RTCTime();
 }
 
 void TimeManager::resetTimer(int timerId) {
-    if (timerRunning) {
-        timer = getTime();
+    if (activeTimers[timerId]) {
+        timerArray[timerId] = getTime();
     }
 }
 
 void TimeManager::clearTimer(int timerId) {
-    timer = RTCTime();
-    timerRunning = false;
+    resetTimer(timerId);
+    stopTimer(timerId);
+}
+
+void TimeManager::stopTimer(int timerId) {
+    activeTimers[timerId] = false;
 }
 } // namespace Time

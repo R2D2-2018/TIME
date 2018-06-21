@@ -2,7 +2,7 @@
  * @file
  * @brief     Main file for the TimeManager class to control the DS3231 RTC
  * module
- * @author    Jasper Smienk
+ * @author    Jasper Smienk, Nick Goris
  * @license   MIT License
  */
 
@@ -21,28 +21,41 @@ int main() {
 
     auto clock = Time::TimeManager(scl, sda);
 
-    Time::RTCTime temp(43, 32, 21, 1, 14, 5, 19);
-    Time::RTCTime temp2(1, 2, 3, 0, 5, 3, 1);
+    auto timersSize = clock.getTimerArraySize();
+    uint16_t timerCounter = 0;
 
-    hwlib::cout << (temp - temp2) << hwlib::endl;
-
-    clock.setTime(temp);
     char someInput;
     while (true) {
         hwlib::cin >> someInput;
-        hwlib::cout << (clock.getTime().getTotalSeconds() - temp.getTotalSeconds()) << hwlib::endl;
-    }
-    // temp.setTotalSeconds(temp.getTotalSeconds());
+        if (someInput == 'q') {
+            clock.setTimer(timerCounter);
+        }
+        if (someInput == 'w') {
+            clock.resetTimer(timerCounter);
+        }
+        if (someInput == 'e') {
+            clock.clearTimer(timerCounter);
+        }
 
-    /*
-     while (true) {
-         Time::RTCTime time = clock.getTime();
-         hwlib::cout << static_cast<int>(time.getHours()) << ":" << static_cast<int>(time.getMinutes()) << ":"
-                     << static_cast<int>(time.getSeconds()) << " - " << static_cast<int>(time.getDayOfTheWeek()) << " "
-                     << static_cast<int>(time.getDayOfTheMonth()) << "/" << static_cast<int>(time.getMonth()) << "/"
-                     << static_cast<int>(time.getYear()) << hwlib::endl;
-         hwlib::wait_ms(100);
-     }
-     */
+        if (someInput == 'o') {
+            if (timerCounter > 0) {
+                timerCounter--;
+            }
+            hwlib::cout << timerCounter + 1 << hwlib::endl;
+        }
+        if (someInput == 'p') {
+            if (timerCounter < 4) {
+                timerCounter++;
+            }
+            hwlib::cout << timerCounter + 1 << hwlib::endl;
+        }
+
+        hwlib::cout << "Current second count is: \t" << clock.getTime().getTotalSeconds() << hwlib::endl;
+
+        for (uint16_t i = 0; i < timersSize; i++) {
+            hwlib::cout << (clock.elapsedTime(i).getTotalSeconds()) << '\t';
+        }
+        hwlib::cout << hwlib::endl;
+    }
     return 0;
 }
