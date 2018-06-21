@@ -44,6 +44,10 @@ int main() {
             mainMenu(clock, &timeMngrState);
             break;
 
+        case TimeManagerStates::SET_TIME:
+            setTime(clock, &timeMngrState);
+            break;
+
         case TimeManagerStates::TIMER_SELECT:
             timerSelect(clock, &timeMngrState);
             break;
