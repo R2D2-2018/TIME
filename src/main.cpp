@@ -31,7 +31,6 @@ int main() {
     StateMachine stm(clock);
 
     while (true) {
-        auto now = clock.getTime();
 
         switch (stm.getState()) {
 
