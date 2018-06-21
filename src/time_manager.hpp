@@ -13,7 +13,6 @@
 #include <cstdint>
 
 #include "bcd_conversion.hpp"
-//#include "object_pool.hpp"
 #include "rtc_time.hpp"
 #include "wrap-hwlib.hpp"
 
@@ -27,11 +26,9 @@ class TimeManager {
     RTCTime alarm;
     bool alarmRunning = false;
 
-    // RTCTime timer;
     static const uint16_t TIMER_AMOUNT = 5;
     std::array<RTCTime, TIMER_AMOUNT> timerArray = {{getTime()}};
     std::array<bool, TIMER_AMOUNT> activeTimers = {{false}};
-    // bool timerRunning = false;
 
   public:
     /**
