@@ -28,34 +28,45 @@ int main() {
     auto timersSize = clock.getTimerArraySize();
     uint16_t timerCounter = 0;
 
-    StateMachine stm(clock);
+    StateMachine STM(clock);
+
+    // Time::RTCTime now(1, 40, 12, 4, 6, 8, 19);
+    // hwlib::cout << now.getYear() << hwlib::endl;
+    // hwlib::cout << "SETTING TIME: \t";
+    // clock.setTime(now);
+    // hwlib::cout << "DONE SETTING TIME" << hwlib::endl;
+
+    // hwlib::cout << "DAY OF THE MONTH: \t" << (int)clock.getTime().getDayOfTheMonth() << hwlib::endl;
+    // hwlib::cout << "MONTH: \t" << (int)clock.getTime().getMonth() << hwlib::endl;
 
     while (true) {
-
-        switch (stm.getState()) {
+        // hwlib::cout << (int)clock.getTime().getYear() << hwlib::endl;
+        //' ' << clock.getTime().getMonth() << ' ' << clock.getTime().getDayOfTheMonth()
+        //            << ' ' << clock.getTime().getHours() << ' ' << clock.getTime().getMinutes() << hwlib::endl;
+        switch (STM.getState()) {
 
         case TimeManagerStates::MAIN_MENU:
-            stm.mainMenu();
+            STM.mainMenu(clock);
             break;
 
         case TimeManagerStates::SET_TIME:
-            stm.setTime();
+            STM.setTime();
             break;
 
         case TimeManagerStates::TIMER_SELECT:
-            stm.timerSelect();
+            STM.timerSelect();
             break;
 
         case TimeManagerStates::ALARM_SELECT:
-            stm.alarmSelect();
+            STM.alarmSelect();
             break;
 
         case TimeManagerStates::TIMER:
-            stm.timerMenu(timerCounter);
+            STM.timerMenu(timerCounter);
             break;
 
         case TimeManagerStates::ALARM:
-            stm.alarmMenu(alarmCounter);
+            STM.alarmMenu(alarmCounter);
             break;
 
         case TimeManagerStates::SET_ALARM:

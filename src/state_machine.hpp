@@ -9,6 +9,7 @@
 #ifndef STATE_MACHINE_HPP
 #define STATE_MACHINE_HPP
 
+#include "rtc_time.hpp"
 #include "time_manager.hpp"
 
 enum class TimeManagerStates {
@@ -29,12 +30,14 @@ class StateMachine {
 
     Time::TimeManager &clock;
 
+    Time::RTCTime temp = {0, 0, 0, 0, 0, 1, 18};
+
   public:
     StateMachine(Time::TimeManager &clock);
 
     TimeManagerStates getState();
 
-    void mainMenu();
+    void mainMenu(Time::TimeManager &clock);
 
     void setTime();
 
@@ -45,6 +48,16 @@ class StateMachine {
     void timerMenu(uint16_t &timerCounter);
 
     void alarmMenu(uint16_t &alarmCounter);
+
+    void setYear();
+
+    void setMonth();
+
+    void setDayOfMonth();
+
+    void setHour();
+
+    void setMinutes();
 };
 
 #endif // STATE_MACHINE_HPP

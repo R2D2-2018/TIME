@@ -1,7 +1,7 @@
 /**
  * @file
  * @brief     HPP file for the RTCTime struct.
- * @author    Jasper Smienk
+ * @author    Jasper Smienk, Nick Goris
  * @license   MIT License
  */
 
@@ -13,6 +13,7 @@
 #include <tuple>
 #include <vector>
 
+#include "bcd_conversion.hpp"
 #include "wrap-hwlib.hpp"
 
 namespace Time {

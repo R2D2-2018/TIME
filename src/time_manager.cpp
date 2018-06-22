@@ -29,6 +29,7 @@ RTCTime TimeManager::getTime() {
 }
 
 void TimeManager::setTime(RTCTime timeAndDate) {
+
     uint8_t data[] = {0,
                       decToBCD(timeAndDate.getSeconds()),
                       decToBCD(timeAndDate.getMinutes()),
