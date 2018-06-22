@@ -16,9 +16,9 @@ TimeManagerStates StateMachine::getState() {
 }
 
 void StateMachine::mainMenu(Time::TimeManager &clock) {
-    hwlib::cout << static_cast<int>(clock.getTime().getHours()) << ':' << (int)clock.getTime().getMinutes() << '\t'
-                << (int)clock.getTime().getDayOfTheMonth() << '/' << (int)clock.getTime().getMonth() << '/'
-                << (int)clock.getTime().getYear() << hwlib::endl;
+    hwlib::cout << static_cast<int>(clock.getTime().getHours()) << ':' << static_cast<int>(clock.getTime().getMinutes()) << '\t'
+                << static_cast<int>(clock.getTime().getDayOfTheMonth()) << '/' << static_cast<int>(clock.getTime().getMonth())
+                << '/' << static_cast<int>(clock.getTime().getYear()) << hwlib::endl;
     hwlib::cout << "Press 1 to cycle through menu, press 2 to select menu, press 3 to set system time" << hwlib::endl;
 
     hwlib::cin >> someInput;
@@ -29,9 +29,9 @@ void StateMachine::mainMenu(Time::TimeManager &clock) {
         timeMngrState = TimeManagerStates::SET_TIME;
         hwlib::cout << "Setting the time.." << hwlib::endl;
     } else {
-        hwlib::cout << (int)clock.getTime().getHours() << ':' << (int)clock.getTime().getMinutes() << '\t'
-                    << (int)clock.getTime().getDayOfTheMonth() << '/' << (int)clock.getTime().getMonth() << '/'
-                    << (int)clock.getTime().getYear() << hwlib::endl;
+        hwlib::cout << static_cast<int>(clock.getTime().getHours()) << ':' << static_cast<int>(clock.getTime().getMinutes()) << '\t'
+                    << static_cast<int>(clock.getTime().getDayOfTheMonth()) << '/' << static_cast<int>(clock.getTime().getMonth())
+                    << '/' << static_cast<int>(clock.getTime().getYear()) << hwlib::endl;
     }
 }
 
@@ -39,18 +39,18 @@ void StateMachine::setYear() {
 
     hwlib::cout << "Press 1 to increase the year, press 2 to decrease the year, press 4 to confirm and press 3 to cancel"
                 << hwlib::endl;
-    hwlib::cout << (int)temp.getYear() << hwlib::endl;
+    hwlib::cout << static_cast<int>(temp.getYear()) << hwlib::endl;
 
     while (timeMngrState != TimeManagerStates::MAIN_MENU) {
         hwlib::cin >> someInput;
 
         if (someInput == '1') {
             temp.setYear(temp.getYear() + 1);
-            hwlib::cout << (int)temp.getYear() << hwlib::endl;
+            hwlib::cout << static_cast<int>(temp.getYear()) << hwlib::endl;
             hwlib::cin >> someInput;
         } else if (someInput == '2') {
             temp.setYear(temp.getYear() - 1);
-            hwlib::cout << (int)temp.getYear() << hwlib::endl;
+            hwlib::cout << static_cast<int>(temp.getYear()) << hwlib::endl;
             hwlib::cin >> someInput;
         } else if (someInput == '3') {
             timeMngrState = TimeManagerStates::MAIN_MENU;
@@ -64,13 +64,13 @@ void StateMachine::setYear() {
 
 void StateMachine::setMonth() {
     hwlib::cout << "Press 1 to cycle through months, press 2 to confirm and press 3 to cancel" << hwlib::endl;
-    hwlib::cout << (int)temp.getMonth() << hwlib::endl;
+    hwlib::cout << static_cast<int>(temp.getMonth()) << hwlib::endl;
     while (timeMngrState != TimeManagerStates::MAIN_MENU) {
         hwlib::cin >> someInput;
 
         if (someInput == '1') {
             temp.setMonth(temp.getMonth() + 1);
-            hwlib::cout << (int)temp.getMonth() << hwlib::endl;
+            hwlib::cout << static_cast<int>(temp.getMonth()) << hwlib::endl;
         } else if (someInput == '2') {
             hwlib::cout << "Month set, set date:" << hwlib::endl;
             StateMachine::setDayOfMonth();
@@ -82,13 +82,13 @@ void StateMachine::setMonth() {
 
 void StateMachine::setDayOfMonth() {
     hwlib::cout << "Press 1 to cycle through days, press 2 to confirm and press 3 to cancel" << hwlib::endl;
-    hwlib::cout << (int)temp.getDayOfTheMonth() << hwlib::endl;
+    hwlib::cout << static_cast<int>(temp.getDayOfTheMonth()) << hwlib::endl;
 
     while (timeMngrState != TimeManagerStates::MAIN_MENU) {
         hwlib::cin >> someInput;
         if (someInput == '1') {
             temp.setDayOfTheMonth(temp.getDayOfTheMonth() + 1);
-            hwlib::cout << (int)temp.getDayOfTheMonth() << hwlib::endl;
+            hwlib::cout << static_cast<int>(temp.getDayOfTheMonth()) << hwlib::endl;
         } else if (someInput == '2') {
             hwlib::cout << "Day set, set hour:" << hwlib::endl;
             StateMachine::setHour();
@@ -100,12 +100,12 @@ void StateMachine::setDayOfMonth() {
 
 void StateMachine::setHour() {
     hwlib::cout << "Press 1 to cycle through hours, press 2 to confirm and press 3 to cancel" << hwlib::endl;
-    hwlib::cout << (int)temp.getHours() << hwlib::endl;
+    hwlib::cout << static_cast<int>(temp.getHours()) << hwlib::endl;
     while (timeMngrState != TimeManagerStates::MAIN_MENU) {
         hwlib::cin >> someInput;
         if (someInput == '1') {
             temp.setHours(temp.getHours() + 1);
-            hwlib::cout << (int)temp.getHours() << hwlib::endl;
+            hwlib::cout << static_cast<int>(temp.getHours()) << hwlib::endl;
         } else if (someInput == '2') {
             hwlib::cout << "Hours set, set minutes:" << hwlib::endl;
             StateMachine::setMinutes();
@@ -117,15 +117,17 @@ void StateMachine::setHour() {
 
 void StateMachine::setMinutes() {
     hwlib::cout << "Press 1 to cycle through minutes, press 2 to confirm and press 3 to cancel" << hwlib::endl;
-    hwlib::cout << (int)temp.getMinutes() << hwlib::endl;
+    hwlib::cout << static_cast<int>(temp.getMinutes()) << hwlib::endl;
     while (timeMngrState != TimeManagerStates::MAIN_MENU) {
         hwlib::cin >> someInput;
         if (someInput == '1') {
             temp.setMinutes(temp.getMinutes() + 1);
-            hwlib::cout << (int)temp.getMinutes() << hwlib::endl;
+            hwlib::cout << static_cast<int>(temp.getMinutes()) << hwlib::endl;
         } else if (someInput == '2') {
-            hwlib::cout << "Time setting is finished with this time:\n " << (int)temp.getHours() << ':' << (int)temp.getMinutes()
-                        << '\t' << (int)temp.getDayOfTheMonth() << '/' << (int)temp.getMonth() << '/' << (int)temp.getYear()
+            hwlib::cout << "Time setting is finished with this time:\n " << static_cast<int>(clock.getTime().getHours()) << ':'
+                        << static_cast<int>(clock.getTime().getMinutes()) << '\t'
+                        << static_cast<int>(clock.getTime().getDayOfTheMonth()) << '/'
+                        << static_cast<int>(clock.getTime().getMonth()) << '/' << static_cast<int>(clock.getTime().getYear())
                         << hwlib::endl;
             hwlib::cout << "Returning to main menu" << hwlib::endl;
             timeMngrState = TimeManagerStates::MAIN_MENU;

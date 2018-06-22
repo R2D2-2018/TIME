@@ -22,27 +22,13 @@ int main() {
 
     auto clock = Time::TimeManager(scl, sda);
 
-    // auto alarmsSize = clock.getAlarmArraySize();
     uint16_t alarmCounter = 0;
 
-    // auto timersSize = clock.getTimerArraySize();
     uint16_t timerCounter = 0;
 
     StateMachine STM(clock);
 
-    // Time::RTCTime now(1, 40, 12, 4, 6, 8, 19);
-    // hwlib::cout << now.getYear() << hwlib::endl;
-    // hwlib::cout << "SETTING TIME: \t";
-    // clock.setTime(now);
-    // hwlib::cout << "DONE SETTING TIME" << hwlib::endl;
-
-    // hwlib::cout << "DAY OF THE MONTH: \t" << (int)clock.getTime().getDayOfTheMonth() << hwlib::endl;
-    // hwlib::cout << "MONTH: \t" << (int)clock.getTime().getMonth() << hwlib::endl;
-
     while (true) {
-        // hwlib::cout << (int)clock.getTime().getYear() << hwlib::endl;
-        //' ' << clock.getTime().getMonth() << ' ' << clock.getTime().getDayOfTheMonth()
-        //            << ' ' << clock.getTime().getHours() << ' ' << clock.getTime().getMinutes() << hwlib::endl;
         switch (STM.getState()) {
 
         case TimeManagerStates::MAIN_MENU:
