@@ -16,15 +16,10 @@ TimeManagerStates StateMachine::getState() {
 }
 
 void StateMachine::mainMenu(Time::TimeManager &clock) {
-    hwlib::cout << (int)clock.getTime().getHours() << ':' << (int)clock.getTime().getMinutes() << '\t'
+    hwlib::cout << static_cast<int>(clock.getTime().getHours()) << ':' << (int)clock.getTime().getMinutes() << '\t'
                 << (int)clock.getTime().getDayOfTheMonth() << '/' << (int)clock.getTime().getMonth() << '/'
                 << (int)clock.getTime().getYear() << hwlib::endl;
     hwlib::cout << "Press 1 to cycle through menu, press 2 to select menu, press 3 to set system time" << hwlib::endl;
-
-    // if (clock.getTime() - now >= 60) {
-    //     hwlib::cout << clock.getTime().getTotalSeconds() << hwlib::endl;
-    //     now = clock.getTime();
-    // }
 
     hwlib::cin >> someInput;
 
@@ -33,6 +28,10 @@ void StateMachine::mainMenu(Time::TimeManager &clock) {
     } else if (someInput == '3') {
         timeMngrState = TimeManagerStates::SET_TIME;
         hwlib::cout << "Setting the time.." << hwlib::endl;
+    } else {
+        hwlib::cout << (int)clock.getTime().getHours() << ':' << (int)clock.getTime().getMinutes() << '\t'
+                    << (int)clock.getTime().getDayOfTheMonth() << '/' << (int)clock.getTime().getMonth() << '/'
+                    << (int)clock.getTime().getYear() << hwlib::endl;
     }
 }
 
@@ -58,7 +57,7 @@ void StateMachine::setYear() {
             return;
         } else if (someInput == '4') {
             hwlib::cout << "Year set. Set month:" << hwlib::endl;
-            setMonth();
+            StateMachine::setMonth();
         }
     }
 }
@@ -74,7 +73,7 @@ void StateMachine::setMonth() {
             hwlib::cout << (int)temp.getMonth() << hwlib::endl;
         } else if (someInput == '2') {
             hwlib::cout << "Month set, set date:" << hwlib::endl;
-            setDayOfMonth();
+            StateMachine::setDayOfMonth();
         } else if (someInput == '3') {
             timeMngrState = TimeManagerStates::MAIN_MENU;
         }
@@ -92,7 +91,7 @@ void StateMachine::setDayOfMonth() {
             hwlib::cout << (int)temp.getDayOfTheMonth() << hwlib::endl;
         } else if (someInput == '2') {
             hwlib::cout << "Day set, set hour:" << hwlib::endl;
-            setHour();
+            StateMachine::setHour();
         } else if (someInput == '3') {
             timeMngrState = TimeManagerStates::MAIN_MENU;
         }
@@ -109,7 +108,7 @@ void StateMachine::setHour() {
             hwlib::cout << (int)temp.getHours() << hwlib::endl;
         } else if (someInput == '2') {
             hwlib::cout << "Hours set, set minutes:" << hwlib::endl;
-            setMinutes();
+            StateMachine::setMinutes();
         } else if (someInput == '3') {
             timeMngrState = TimeManagerStates::MAIN_MENU;
         }

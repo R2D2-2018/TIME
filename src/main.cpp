@@ -22,10 +22,10 @@ int main() {
 
     auto clock = Time::TimeManager(scl, sda);
 
-    auto alarmsSize = clock.getAlarmArraySize();
+    // auto alarmsSize = clock.getAlarmArraySize();
     uint16_t alarmCounter = 0;
 
-    auto timersSize = clock.getTimerArraySize();
+    // auto timersSize = clock.getTimerArraySize();
     uint16_t timerCounter = 0;
 
     StateMachine STM(clock);

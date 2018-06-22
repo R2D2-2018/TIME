@@ -33,7 +33,7 @@ class StateMachine {
     Time::RTCTime temp = {0, 0, 0, 0, 0, 1, 18};
 
   public:
-    StateMachine(Time::TimeManager &clock);
+    explicit StateMachine(Time::TimeManager &clock);
 
     TimeManagerStates getState();
 

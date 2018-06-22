@@ -42,7 +42,7 @@ struct RTCTime {
     /**
      * @brief Constructor which uses just 1 value for the total seconds.
      */
-    RTCTime(uint64_t totalSeconds);
+    explicit RTCTime(uint64_t totalSeconds);
 
     /**
      * @brief Get the amount of seconds.

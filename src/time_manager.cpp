@@ -12,7 +12,7 @@
 namespace Time {
 TimeManager::TimeManager(hwlib::pin_oc &scl, hwlib::pin_oc &sda)
     : scl(scl), sda(sda), realTimeClock(hwlib::i2c_bus_bit_banged_scl_sda(scl, sda)) {
-    setTime(0);
+    TimeManager::setTime(RTCTime(0));
 }
 
 RTCTime TimeManager::getTime() {
