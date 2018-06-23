@@ -28,6 +28,13 @@ int main() {
 
     StateMachine STM(clock);
 
+    Time::RTCTime temp(0, 0, 0, 1, 1, 1, 0);
+    Time::RTCTime temp2(30, 0, 0, 1, 1, 1, 0);
+
+    hwlib::cout << temp.getTotalSeconds() << '-' << temp2.getTotalSeconds() << '=' << hwlib::endl;
+
+    hwlib::cout << (temp.getTotalSeconds() - temp2.getTotalSeconds()) << hwlib::endl;
+
     while (true) {
         switch (STM.getState()) {
 

@@ -153,13 +153,13 @@ TEST_CASE("RTCTime math") {
     }
 
     SECTION("Subtraction") {
-        REQUIRE((temp - temp2).getTotalSeconds() == -30);
-        REQUIRE((temp - temp3).getTotalSeconds() == -1800);
-        REQUIRE((temp - temp4).getTotalSeconds() == -36000);
-        REQUIRE((temp - temp5).getTotalSeconds() == -2160000);
-        REQUIRE((temp - temp6).getTotalSeconds() == -10454400);
-        REQUIRE((temp - temp7).getTotalSeconds() == -1514764800);
-        REQUIRE((temp - temp8).getTotalSeconds() == -34782984);
+        REQUIRE(temp.getTotalSeconds() - temp2.getTotalSeconds() == -30);
+        REQUIRE(temp.getTotalSeconds() - temp3.getTotalSeconds() == -1800);
+        REQUIRE(temp.getTotalSeconds() - temp4.getTotalSeconds() == -36000);
+        REQUIRE(temp.getTotalSeconds() - temp5.getTotalSeconds() == -2160000);
+        REQUIRE(temp.getTotalSeconds() - temp6.getTotalSeconds() == -10454400);
+        REQUIRE(temp.getTotalSeconds() - temp7.getTotalSeconds() == -1514764800);
+        REQUIRE(temp.getTotalSeconds() - temp8.getTotalSeconds() == -34782984);
     }
 
     SECTION("Addition equals") {
