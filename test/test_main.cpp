@@ -143,13 +143,13 @@ TEST_CASE("RTCTime math") {
     Time::RTCTime temp8(24, 56, 13, 1, 6, 2, 1);
 
     SECTION("Addition") {
-        REQUIRE(temp + temp2 == 30);
-        REQUIRE(temp2 + temp3 == 1830);
-        REQUIRE(temp3 + temp4 == 37800);
-        REQUIRE(temp4 + temp5 == 2196000);
-        REQUIRE(temp5 + temp6 == 12614400);
-        REQUIRE(temp6 + temp7 == 1525219200);
-        REQUIRE(temp7 + temp8 == 1549547784);
+        REQUIRE((temp + temp2).getTotalSeconds() == 30);
+        REQUIRE((temp2 + temp3).getTotalSeconds() == 1830);
+        REQUIRE((temp3 + temp4).getTotalSeconds() == 37800);
+        REQUIRE((temp4 + temp5).getTotalSeconds() == 2196000);
+        REQUIRE((temp5 + temp6).getTotalSeconds() == 12614400);
+        REQUIRE((temp6 + temp7).getTotalSeconds() == 1525219200);
+        REQUIRE((temp7 + temp8).getTotalSeconds() == 1549547784);
     }
 
     SECTION("Subtraction") {
