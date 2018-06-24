@@ -36,7 +36,7 @@ void StateMachine::mainMenu() {
 
         for (int16_t i = 0; i < clock.getTimerArraySize(); ++i) {
             if (clock.checkActiveTimer(i)) {
-                hwlib::cout << "Timer " << i + 1 << "is currently at: " << static_cast<int>(clock.elapsedTime(i).getTotalSeconds())
+                hwlib::cout << "Timer " << i + 1 << " is currently at: " << static_cast<int>(clock.elapsedTime(i).getTotalSeconds())
                             << hwlib::endl;
             }
         }
@@ -132,11 +132,9 @@ void StateMachine::setMinutes() {
             temp.setMinutes(temp.getMinutes() + 1);
             hwlib::cout << static_cast<int>(temp.getMinutes()) << hwlib::endl;
         } else if (someInput == '2') {
-            hwlib::cout << "Time setting is finished with this time:\n " << static_cast<int>(clock.getTime().getHours()) << ':'
-                        << static_cast<int>(clock.getTime().getMinutes()) << '\t'
-                        << static_cast<int>(clock.getTime().getDayOfTheMonth()) << '/'
-                        << static_cast<int>(clock.getTime().getMonth()) << '/' << static_cast<int>(clock.getTime().getYear())
-                        << hwlib::endl;
+            hwlib::cout << "Time setting is finished with this time:\n " << static_cast<int>(temp.getHours()) << ':'
+                        << static_cast<int>(temp.getMinutes()) << '\t' << static_cast<int>(temp.getDayOfTheMonth()) << '/'
+                        << static_cast<int>(temp.getMonth()) << '/' << static_cast<int>(temp.getYear()) << hwlib::endl;
             hwlib::cout << "Returning to main menu" << hwlib::endl;
             timeMngrState = TimeManagerStates::MAIN_MENU;
             if (previousState == TimeManagerStates::MAIN_MENU) {
