@@ -158,6 +158,9 @@ void StateMachine::timerSelect() {
     if (someInput == '1') {
         timeMngrState = TimeManagerStates::ALARM_SELECT;
     } else if (someInput == '2') {
+        hwlib::cout << "Timer selected.Press 1 to cycle through timers, press 2 to start a timer \n Press 4 to reset a timer, "
+                       "press 5 to clear a timer\nPress 3 to return to main menu"
+                    << hwlib::endl;
         timeMngrState = TimeManagerStates::TIMER;
     } else if (someInput == '3') {
         timeMngrState = TimeManagerStates::MAIN_MENU;
@@ -170,6 +173,9 @@ void StateMachine::alarmSelect() {
     if (someInput == '1') {
         timeMngrState = TimeManagerStates::TIMER_SELECT;
     } else if (someInput == '2') {
+        hwlib::cout << "Alarm selected.Press 1 to cycle through alarms, press 2 to start an alarm\nPress 4 to clear an alarm, "
+                       "Press 3 to return to main menu"
+                    << hwlib::endl;
         previousState = TimeManagerStates::ALARM_SELECT;
         timeMngrState = TimeManagerStates::ALARM;
     } else if (someInput == '3') {
@@ -178,9 +184,6 @@ void StateMachine::alarmSelect() {
 }
 
 void StateMachine::timerMenu() {
-    hwlib::cout << "Timer selected.Press 1 to cycle through timers, press 2 to start a timer \n Press 4 to reset a timer, "
-                   "press 5 to clear a timer\nPress 3 to return to main menu"
-                << hwlib::endl;
     hwlib::cout << "Set timer " << timerCounter + 1 << '?' << hwlib::endl;
     hwlib::cin >> someInput;
     if (someInput == '1') {
@@ -198,9 +201,6 @@ void StateMachine::timerMenu() {
 }
 
 void StateMachine::alarmMenu() {
-    hwlib::cout << "Alarm selected.Press 1 to cycle through alarms, press 2 to start an alarms \nPress 4 to clear an alarms, "
-                   "Press 3 to return to main menu"
-                << hwlib::endl;
     hwlib::cout << "Set alarm " << alarmCounter + 1 << '?' << hwlib::endl;
     hwlib::cin >> someInput;
     if (someInput == '1') {
