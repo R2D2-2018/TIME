@@ -22,24 +22,13 @@ int main() {
 
     auto clock = Time::TimeManager(scl, sda);
 
-    uint16_t alarmCounter = 0;
-
-    uint16_t timerCounter = 0;
-
     StateMachine STM(clock);
-
-    Time::RTCTime temp(0, 0, 0, 1, 1, 1, 0);
-    Time::RTCTime temp2(30, 0, 0, 1, 1, 1, 0);
-
-    hwlib::cout << temp.getTotalSeconds() << '-' << temp2.getTotalSeconds() << '=' << hwlib::endl;
-
-    hwlib::cout << (temp.getTotalSeconds() - temp2.getTotalSeconds()) << hwlib::endl;
 
     while (true) {
         switch (STM.getState()) {
 
         case TimeManagerStates::MAIN_MENU:
-            STM.mainMenu(clock);
+            STM.mainMenu();
             break;
 
         case TimeManagerStates::SET_TIME:
@@ -55,15 +44,15 @@ int main() {
             break;
 
         case TimeManagerStates::TIMER:
-            STM.timerMenu(timerCounter);
+            STM.timerMenu();
             break;
 
         case TimeManagerStates::ALARM:
-            STM.alarmMenu(alarmCounter);
+            STM.alarmMenu();
             break;
 
         case TimeManagerStates::SET_ALARM:
-            hwlib::cout << "Setting an alarm" << hwlib::endl;
+            STM.setTime();
             break;
         }
     }

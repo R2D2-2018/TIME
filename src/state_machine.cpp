@@ -15,7 +15,7 @@ TimeManagerStates StateMachine::getState() {
     return timeMngrState;
 }
 
-void StateMachine::mainMenu(Time::TimeManager &clock) {
+void StateMachine::mainMenu() {
     hwlib::cout << static_cast<int>(clock.getTime().getHours()) << ':' << static_cast<int>(clock.getTime().getMinutes()) << '\t'
                 << static_cast<int>(clock.getTime().getDayOfTheMonth()) << '/' << static_cast<int>(clock.getTime().getMonth())
                 << '/' << static_cast<int>(clock.getTime().getYear()) << hwlib::endl;
@@ -26,6 +26,7 @@ void StateMachine::mainMenu(Time::TimeManager &clock) {
     if (someInput == '1') {
         timeMngrState = TimeManagerStates::TIMER_SELECT;
     } else if (someInput == '3') {
+        previousState = TimeManagerStates::MAIN_MENU;
         timeMngrState = TimeManagerStates::SET_TIME;
         hwlib::cout << "Setting the time.." << hwlib::endl;
     } else {
@@ -131,7 +132,11 @@ void StateMachine::setMinutes() {
                         << hwlib::endl;
             hwlib::cout << "Returning to main menu" << hwlib::endl;
             timeMngrState = TimeManagerStates::MAIN_MENU;
-            clock.setTime(temp);
+            if (previousState == TimeManagerStates::MAIN_MENU) {
+                clock.setTime(temp);
+            } else if (previousState == TimeManagerStates::ALARM_SELECT) {
+                clock.setAlarm(alarmCounter, temp);
+            }
         } else if (someInput == '3') {
             timeMngrState = TimeManagerStates::MAIN_MENU;
         }
@@ -160,19 +165,21 @@ void StateMachine::alarmSelect() {
     if (someInput == '1') {
         timeMngrState = TimeManagerStates::TIMER_SELECT;
     } else if (someInput == '2') {
+        previousState = TimeManagerStates::ALARM_SELECT;
         timeMngrState = TimeManagerStates::ALARM;
     } else if (someInput == '3') {
         timeMngrState = TimeManagerStates::MAIN_MENU;
     }
 }
 
-void StateMachine::timerMenu(uint16_t &timerCounter) {
+void StateMachine::timerMenu() {
     hwlib::cout << "Timer selected.Press 1 to cycle through timers, press 2 to start a timer \n Press 4 to reset a timer, "
                    "press 5 to clear a timer \n Press 3 to return to main menu"
                 << hwlib::endl;
     hwlib::cin >> someInput;
     if (someInput == '1') {
         timerCounter++;
+        timerCounter = timerCounter % clock.getTimerArraySize();
     } else if (someInput == '2') {
         clock.setTimer(timerCounter);
     } else if (someInput == '3') {
@@ -184,13 +191,14 @@ void StateMachine::timerMenu(uint16_t &timerCounter) {
     }
 }
 
-void StateMachine::alarmMenu(uint16_t &alarmCounter) {
+void StateMachine::alarmMenu() {
     hwlib::cout << "Alarm selected.Press 1 to cycle through alarms, press 2 to start an alarms \n Press 4 to clear an alarms, "
                    "\n Press 3 to return to main menu"
                 << hwlib::endl;
     hwlib::cin >> someInput;
     if (someInput == '1') {
         alarmCounter++;
+        alarmCounter = alarmCounter % clock.getAlarmArraySize();
     } else if (someInput == '2') {
         timeMngrState = TimeManagerStates::SET_ALARM;
     } else if (someInput == '3') {

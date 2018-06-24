@@ -25,6 +25,7 @@ enum class TimeManagerStates {
 class StateMachine {
   private:
     TimeManagerStates timeMngrState = TimeManagerStates::MAIN_MENU;
+    TimeManagerStates previousState = TimeManagerStates::MAIN_MENU;
 
     char someInput = '\0';
 
@@ -32,12 +33,16 @@ class StateMachine {
 
     Time::RTCTime temp = {0, 0, 0, 0, 0, 1, 18};
 
+    uint16_t timerCounter = 0;
+
+    uint16_t alarmCounter = 0;
+
   public:
     explicit StateMachine(Time::TimeManager &clock);
 
     TimeManagerStates getState();
 
-    void mainMenu(Time::TimeManager &clock);
+    void mainMenu();
 
     void setTime();
 
@@ -45,9 +50,9 @@ class StateMachine {
 
     void alarmSelect();
 
-    void timerMenu(uint16_t &timerCounter);
+    void timerMenu();
 
-    void alarmMenu(uint16_t &alarmCounter);
+    void alarmMenu();
 
     void setYear();
 
