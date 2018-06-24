@@ -159,6 +159,20 @@ class TimeManager {
      * @param[in]     timerId     Number of timer.
      */
     void stopTimer(int timerId);
+
+    /**
+     * @brief Returns whether a timer is active or not
+     *
+     * @param[in]       timerId     Numver of timer.
+     */
+    bool checkActiveTimer(int timerId);
+
+    /**
+     * @brief Returns whether an alarm is active or not
+     *
+     * @param[in]       alarmId     Numver of alarm.
+     */
+    bool checkActiveAlarm(int alarmId);
 };
 } // namespace Time
 

@@ -19,7 +19,7 @@ void StateMachine::mainMenu() {
     hwlib::cout << static_cast<int>(clock.getTime().getHours()) << ':' << static_cast<int>(clock.getTime().getMinutes()) << '\t'
                 << static_cast<int>(clock.getTime().getDayOfTheMonth()) << '/' << static_cast<int>(clock.getTime().getMonth())
                 << '/' << static_cast<int>(clock.getTime().getYear()) << hwlib::endl;
-    hwlib::cout << "Press 1 to cycle through menu, press 2 to select menu, press 3 to set system time" << hwlib::endl;
+    hwlib::cout << "Press 1 to cycle through menu, press 2 to select menu,\npress 3 to set system time" << hwlib::endl;
 
     hwlib::cin >> someInput;
 
@@ -33,12 +33,19 @@ void StateMachine::mainMenu() {
         hwlib::cout << static_cast<int>(clock.getTime().getHours()) << ':' << static_cast<int>(clock.getTime().getMinutes()) << '\t'
                     << static_cast<int>(clock.getTime().getDayOfTheMonth()) << '/' << static_cast<int>(clock.getTime().getMonth())
                     << '/' << static_cast<int>(clock.getTime().getYear()) << hwlib::endl;
+
+        for (int16_t i = 0; i < clock.getTimerArraySize(); ++i) {
+            if (clock.checkActiveTimer(i)) {
+                hwlib::cout << "Timer " << i + 1 << "is currently at: " << static_cast<int>(clock.elapsedTime(i).getTotalSeconds())
+                            << hwlib::endl;
+            }
+        }
     }
 }
 
 void StateMachine::setYear() {
 
-    hwlib::cout << "Press 1 to increase the year, press 2 to decrease the year, press 4 to confirm and press 3 to cancel"
+    hwlib::cout << "Press 1 to increase the year, press 2 to decrease the year,\npress 4 to confirm and press 3 to cancel"
                 << hwlib::endl;
     hwlib::cout << static_cast<int>(temp.getYear()) << hwlib::endl;
 
@@ -64,7 +71,7 @@ void StateMachine::setYear() {
 }
 
 void StateMachine::setMonth() {
-    hwlib::cout << "Press 1 to cycle through months, press 2 to confirm and press 3 to cancel" << hwlib::endl;
+    hwlib::cout << "Press 1 to cycle through months, press 2 to confirm\nand press 3 to cancel" << hwlib::endl;
     hwlib::cout << static_cast<int>(temp.getMonth()) << hwlib::endl;
     while (timeMngrState != TimeManagerStates::MAIN_MENU) {
         hwlib::cin >> someInput;
@@ -82,7 +89,7 @@ void StateMachine::setMonth() {
 }
 
 void StateMachine::setDayOfMonth() {
-    hwlib::cout << "Press 1 to cycle through days, press 2 to confirm and press 3 to cancel" << hwlib::endl;
+    hwlib::cout << "Press 1 to cycle through days, press 2 to confirm\nand press 3 to cancel" << hwlib::endl;
     hwlib::cout << static_cast<int>(temp.getDayOfTheMonth()) << hwlib::endl;
 
     while (timeMngrState != TimeManagerStates::MAIN_MENU) {
@@ -117,7 +124,7 @@ void StateMachine::setHour() {
 }
 
 void StateMachine::setMinutes() {
-    hwlib::cout << "Press 1 to cycle through minutes, press 2 to confirm and press 3 to cancel" << hwlib::endl;
+    hwlib::cout << "Press 1 to cycle through minutes, press 2 to confirm\nand press 3 to cancel" << hwlib::endl;
     hwlib::cout << static_cast<int>(temp.getMinutes()) << hwlib::endl;
     while (timeMngrState != TimeManagerStates::MAIN_MENU) {
         hwlib::cin >> someInput;
@@ -148,7 +155,7 @@ void StateMachine::setTime() {
 }
 
 void StateMachine::timerSelect() {
-    hwlib::cout << "Timer menu? Press 2 to confirm, press 3 to cancel" << hwlib::endl;
+    hwlib::cout << "Timer menu? Press 2 to confirm,\npress 3 to cancel" << hwlib::endl;
     hwlib::cin >> someInput;
     if (someInput == '1') {
         timeMngrState = TimeManagerStates::ALARM_SELECT;
@@ -160,7 +167,7 @@ void StateMachine::timerSelect() {
 }
 
 void StateMachine::alarmSelect() {
-    hwlib::cout << "Alarm menu? Press 2 to confirm, press 3 to cancel" << hwlib::endl;
+    hwlib::cout << "Alarm menu? Press 2 to confirm,\npress 3 to cancel" << hwlib::endl;
     hwlib::cin >> someInput;
     if (someInput == '1') {
         timeMngrState = TimeManagerStates::TIMER_SELECT;
@@ -174,8 +181,9 @@ void StateMachine::alarmSelect() {
 
 void StateMachine::timerMenu() {
     hwlib::cout << "Timer selected.Press 1 to cycle through timers, press 2 to start a timer \n Press 4 to reset a timer, "
-                   "press 5 to clear a timer \n Press 3 to return to main menu"
+                   "press 5 to clear a timer\nPress 3 to return to main menu"
                 << hwlib::endl;
+    hwlib::cout << "Set timer " << timerCounter + 1 << '?' << hwlib::endl;
     hwlib::cin >> someInput;
     if (someInput == '1') {
         timerCounter++;
@@ -192,9 +200,10 @@ void StateMachine::timerMenu() {
 }
 
 void StateMachine::alarmMenu() {
-    hwlib::cout << "Alarm selected.Press 1 to cycle through alarms, press 2 to start an alarms \n Press 4 to clear an alarms, "
-                   "\n Press 3 to return to main menu"
+    hwlib::cout << "Alarm selected.Press 1 to cycle through alarms, press 2 to start an alarms \nPress 4 to clear an alarms, "
+                   "Press 3 to return to main menu"
                 << hwlib::endl;
+    hwlib::cout << "Set alarm " << alarmCounter + 1 << '?' << hwlib::endl;
     hwlib::cin >> someInput;
     if (someInput == '1') {
         alarmCounter++;

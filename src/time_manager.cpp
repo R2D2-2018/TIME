@@ -97,4 +97,12 @@ void TimeManager::clearTimer(int timerId) {
 void TimeManager::stopTimer(int timerId) {
     activeTimers[timerId] = false;
 }
+
+bool TimeManager::checkActiveTimer(int timerId) {
+    return activeTimers[timerId];
+}
+
+bool TimeManager::checkActiveAlarm(int alarmId) {
+    return activeTimers[alarmId];
+}
 } // namespace Time
