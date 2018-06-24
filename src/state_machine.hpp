@@ -22,6 +22,7 @@ enum class TimeManagerStates {
     SET_ALARM     // Setting an alarm
 };
 
+namespace Time {
 class StateMachine {
   private:
     TimeManagerStates timeMngrState = TimeManagerStates::MAIN_MENU;
@@ -38,31 +39,101 @@ class StateMachine {
     uint16_t alarmCounter = 0;
 
   public:
+    /**
+     * @brief Default constructor
+     *
+     * Default constructor for the TimeManager StateMachine class
+     *
+     * @param[in]   clock     The TimeManager object this State Machine manages the states for
+     */
     explicit StateMachine(Time::TimeManager &clock);
 
+    /**
+     * @brief Returns current state
+     *
+     * Get function to return the current state of the STM
+     */
     TimeManagerStates getState();
 
+    /**
+     * @brief Main menu function
+     *
+     * This function is called in the Main Menu state. This is the default state at the beginning and when cancelling from any other
+     * state.
+     */
     void mainMenu();
 
+    /**
+     * @brief Sets time of internal temp RTCTime object
+     *
+     * This function is called to set the internal RTCTime temporary object. This is used a as a buffer to then write to external
+     * RTCTime objects, such as the system time or an alarm
+     */
     void setTime();
 
+    /**
+     * @brief Timer select function
+     *
+     * This function is called from the Main Menu state, when the submenu for setting a Timer is selected
+     */
     void timerSelect();
 
+    /**
+     * @brief Alarm select function
+     *
+     * This function is called from the Main Menu state, when the submenu for setting a Alarm is selected
+     */
     void alarmSelect();
 
+    /**
+     * @brief Timer Menu function
+     *
+     * This function is called from the timer select state, when the timer submenu choice is confirmed
+     */
     void timerMenu();
 
+    /**
+     * @brief Alarm Menu function
+     *
+     * This function is called from the alarm select state, when the alarm submenu choice is confirmed
+     */
     void alarmMenu();
 
+    /**
+     * @brief Set year function
+     *
+     * This function is called from the set time state, it sets the year of the internal RTCTime temporary object
+     */
     void setYear();
 
+    /**
+     * @brief Set month function
+     *
+     * This function is called from the set time state, it sets the month of the internal RTCTime temporary object
+     */
     void setMonth();
 
+    /**
+     * @brief Set day of month function
+     *
+     * This function is called from the set time state, it sets the day of month of the internal RTCTime temporary object
+     */
     void setDayOfMonth();
 
+    /**
+     * @brief Set hour function
+     *
+     * This function is called from the set time state, it sets the hour of the internal RTCTime temporary object
+     */
     void setHour();
 
+    /**
+     * @brief Set minutes function
+     *
+     * This function is called from the set time state, it sets the minutes of the internal RTCTime temporary object
+     */
     void setMinutes();
 };
+} // namespace Time
 
 #endif // STATE_MACHINE_HPP

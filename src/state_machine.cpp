@@ -8,6 +8,7 @@
 
 #include "state_machine.hpp"
 
+namespace Time {
 StateMachine::StateMachine(Time::TimeManager &clock) : clock(clock) {
 }
 
@@ -214,3 +215,4 @@ void StateMachine::alarmMenu() {
         clock.clearAlarm(alarmCounter);
     }
 }
+} // namespace Time

@@ -24,17 +24,14 @@ class TimeManager {
     hwlib::pin_oc &sda;
     hwlib::i2c_bus_bit_banged_scl_sda realTimeClock;
 
-    // RTCTime alarm;
     static const uint16_t ALARM_AMOUNT = 5;
     std::array<RTCTime, ALARM_AMOUNT> alarmArray = {{getTime()}};
     std::array<bool, ALARM_AMOUNT> activeAlarms = {{false}};
     bool alarmRunning = false;
 
-    // RTCTime timer;
     static const uint16_t TIMER_AMOUNT = 5;
     std::array<RTCTime, TIMER_AMOUNT> timerArray = {{getTime()}};
     std::array<bool, TIMER_AMOUNT> activeTimers = {{false}};
-    // bool timerRunning = false;
 
   public:
     /**

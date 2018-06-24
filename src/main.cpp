@@ -22,7 +22,7 @@ int main() {
 
     auto clock = Time::TimeManager(scl, sda);
 
-    StateMachine STM(clock);
+    Time::StateMachine STM(clock);
 
     while (true) {
         switch (STM.getState()) {
