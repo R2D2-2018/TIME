@@ -1,7 +1,7 @@
 /**
  * @file
  * @brief     HPP file for the RTCTime struct.
- * @author    Jasper Smienk
+ * @author    Jasper Smienk, Nick Goris
  * @license   MIT License
  */
 
@@ -13,6 +13,7 @@
 #include <tuple>
 #include <vector>
 
+#include "bcd_conversion.hpp"
 #include "wrap-hwlib.hpp"
 
 namespace Time {
@@ -41,7 +42,7 @@ struct RTCTime {
     /**
      * @brief Constructor which uses just 1 value for the total seconds.
      */
-    RTCTime(uint64_t totalSeconds);
+    explicit RTCTime(uint64_t totalSeconds);
 
     /**
      * @brief Get the amount of seconds.

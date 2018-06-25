@@ -1,7 +1,7 @@
 /**
  * @file
  * @brief     CPP file for the RTCTime struct.
- * @author    Jasper Smienk
+ * @author    Jasper Smienk, Nick Goris
  * @license   MIT License
  */
 
@@ -116,10 +116,12 @@ void RTCTime::setTotalSeconds(uint64_t totalSeconds) {
     setYear(newYear);
     int newMonth = 0;
     std::array<int, 12> daysInMonth = {31, (newYear % 4 == 0 ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    while (totalSeconds >= (daysInMonth[newMonth] * 86400)) {
-        totalSeconds -= (daysInMonth[newMonth] * 86400);
+
+    while (totalSeconds >= static_cast<unsigned int>(daysInMonth[newMonth] * 86400)) {
+        totalSeconds -= static_cast<unsigned int>(daysInMonth[newMonth] * 86400);
         newMonth++;
     }
+
     setMonth(newMonth + 1);
     setDayOfTheMonth((totalSeconds / 86400) + 1);
     totalSeconds %= 86400;
