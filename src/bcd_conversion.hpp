@@ -8,6 +8,7 @@
 #ifndef BCD_CONVERSION_HPP
 #define BCD_CONVERSION_HPP
 
+#include "wrap-hwlib.hpp"
 #include <cstdint>
 
 /**

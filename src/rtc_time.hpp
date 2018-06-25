@@ -1,7 +1,7 @@
 /**
  * @file
  * @brief     HPP file for the RTCTime struct.
- * @author    Jasper Smienk
+ * @author    Jasper Smienk, Nick Goris
  * @license   MIT License
  */
 
@@ -13,17 +13,25 @@
 #include <tuple>
 #include <vector>
 
+#include "bcd_conversion.hpp"
 #include "wrap-hwlib.hpp"
 
 namespace Time {
 struct RTCTime {
   private:
+    ///< Variable that keeps track of seconds (0-59)
     uint8_t seconds = 0;
+    ///< Variable that keeps track of minutes (0-59)
     uint8_t minutes = 0;
+    ///< Variable that keeps track of hours (0-23)
     uint8_t hours = 0;
+    ///< Variable that keeps track of the day of the week (1-7)
     uint8_t dayOfTheWeek = 1;
+    ///< Variable that keeps track of the day of the month (1-28/30/31)
     uint8_t dayOfTheMonth = 1;
+    ///< Variable that keeps track of the month (1-12)
     uint8_t month = 1;
+    ///< Variable that keeps track of years (0-100)
     uint8_t year = 0;
 
   public:
@@ -41,7 +49,7 @@ struct RTCTime {
     /**
      * @brief Constructor which uses just 1 value for the total seconds.
      */
-    RTCTime(uint64_t totalSeconds);
+    explicit RTCTime(uint64_t totalSeconds);
 
     /**
      * @brief Get the amount of seconds.

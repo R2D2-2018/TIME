@@ -19,15 +19,25 @@
 namespace Time {
 class TimeManager {
   private:
+    ///< Reference to the Arduino SCL pin (pin 21)
     hwlib::pin_oc &scl;
+    ///< Reference to the Arduino SDA pin (pin 22)
     hwlib::pin_oc &sda;
+    ///< Bit banged i2c bus object
     hwlib::i2c_bus_bit_banged_scl_sda realTimeClock;
 
-    RTCTime alarm;
-    bool alarmRunning = false;
+    ///< Maximum number of alarms
+    static const uint16_t ALARM_AMOUNT = 5;
+    ///< Alarm container, initialised at 0
+    std::array<RTCTime, ALARM_AMOUNT> alarmArray = {{getTime()}};
+    ///< Container that keeps track of which alarms are active, initalised at false
+    std::array<bool, ALARM_AMOUNT> activeAlarms = {{false}};
 
+    ///< Maximum number of timers
     static const uint16_t TIMER_AMOUNT = 5;
+    ///< Timer container, initialised at 0
     std::array<RTCTime, TIMER_AMOUNT> timerArray = {{getTime()}};
+    ///< Container that keeps track of active timers
     std::array<bool, TIMER_AMOUNT> activeTimers = {{false}};
 
   public:
@@ -64,19 +74,40 @@ class TimeManager {
      *
      * Set the alarm time to a new time.
      *
-     * @param[in]     alarmId     Number of alarm. (Ignored for now)
+     * @param[in]     alarmId     Number of alarm.
      * @param[in]     newAlarm    A RTCTime struct with the new alarm.
      */
     void setAlarm(int alarmId, RTCTime newAlarm);
+
+    /**
+     * @brief Returns the alarm container.
+     *
+     * Returns the alarm container
+     *
+     * @return     std::array<RTCTime, ALARM_AMOUNT>  Alarm array
+     */
+    uint16_t getAlarmArraySize();
 
     /**
      * @brief Clear the alarm.
      *
      * Resets the alarm so that is doesn't run anymore.
      *
-     * @param[in]     alarmId     Number of alarm. (Ignored for now)
+     * @param[in]     alarmId     Number of alarm.
      */
     void clearAlarm(int alarmId);
+
+    /**
+     * @brief Checks if an alarm has expired
+     *
+     * This function checks if an alarm is running (if not it returns false),
+     * and if it is, it returns whether or not the current time is equal to
+     * or has surpassed the set time for the alarm.
+     *
+     * @param[in]     alarmId     Number of alarm.
+     * @return        bool        Whether or not the alarm has expired
+     */
+    bool checkAlarm(int alarmId);
 
     /**
      * @brief Set the timer.
@@ -132,6 +163,20 @@ class TimeManager {
      * @param[in]     timerId     Number of timer.
      */
     void stopTimer(int timerId);
+
+    /**
+     * @brief Returns whether a timer is active or not
+     *
+     * @param[in]       timerId     Numver of timer.
+     */
+    bool checkActiveTimer(int timerId);
+
+    /**
+     * @brief Returns whether an alarm is active or not
+     *
+     * @param[in]       alarmId     Numver of alarm.
+     */
+    bool checkActiveAlarm(int alarmId);
 };
 } // namespace Time
 
