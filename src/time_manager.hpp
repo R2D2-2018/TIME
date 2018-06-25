@@ -19,16 +19,25 @@
 namespace Time {
 class TimeManager {
   private:
+    ///< Reference to the Arduino SCL pin (pin 21)
     hwlib::pin_oc &scl;
+    ///< Reference to the Arduino SDA pin (pin 22)
     hwlib::pin_oc &sda;
+    ///< Bit banged i2c bus object
     hwlib::i2c_bus_bit_banged_scl_sda realTimeClock;
 
+    ///< Maximum number of alarms
     static const uint16_t ALARM_AMOUNT = 5;
+    ///< Alarm container, initialised at 0
     std::array<RTCTime, ALARM_AMOUNT> alarmArray = {{getTime()}};
+    ///< Container that keeps track of which alarms are active, initalised at false
     std::array<bool, ALARM_AMOUNT> activeAlarms = {{false}};
 
+    ///< Maximum number of timers
     static const uint16_t TIMER_AMOUNT = 5;
+    ///< Timer container, initialised at 0
     std::array<RTCTime, TIMER_AMOUNT> timerArray = {{getTime()}};
+    ///< Container that keeps track of active timers
     std::array<bool, TIMER_AMOUNT> activeTimers = {{false}};
 
   public:

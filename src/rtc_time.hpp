@@ -19,12 +19,19 @@
 namespace Time {
 struct RTCTime {
   private:
+    ///< Variable that keeps track of seconds (0-59)
     uint8_t seconds = 0;
+    ///< Variable that keeps track of minutes (0-59)
     uint8_t minutes = 0;
+    ///< Variable that keeps track of hours (0-23)
     uint8_t hours = 0;
+    ///< Variable that keeps track of the day of the week (1-7)
     uint8_t dayOfTheWeek = 1;
+    ///< Variable that keeps track of the day of the month (1-28/30/31)
     uint8_t dayOfTheMonth = 1;
+    ///< Variable that keeps track of the month (1-12)
     uint8_t month = 1;
+    ///< Variable that keeps track of years (0-100)
     uint8_t year = 0;
 
   public:
