@@ -55,7 +55,7 @@ uint16_t TimeManager::getAlarmArraySize() {
 }
 
 bool TimeManager::checkAlarm(int alarmId) {
-    if (activeAlarms[alarmId]) {
+    if (checkActiveAlarm(alarmId)) {
         if (alarmArray[alarmId] <= getTime()) {
             hwlib::cout << "BEEP BEEP" << hwlib::endl;
             return true;
@@ -66,7 +66,7 @@ bool TimeManager::checkAlarm(int alarmId) {
 }
 
 void TimeManager::setTimer(int timerId) {
-    if (!activeTimers[timerId]) {
+    if (!checkActiveTimer(timerId)) {
         timerArray[timerId] = getTime();
         activeTimers[timerId] = true;
     }
@@ -77,14 +77,14 @@ uint16_t TimeManager::getTimerArraySize() const {
 }
 
 RTCTime TimeManager::elapsedTime(int timerId) {
-    if (activeTimers[timerId]) {
+    if (checkActiveTimer(timerId)) {
         return (getTime() - timerArray[timerId]);
     }
     return RTCTime();
 }
 
 void TimeManager::resetTimer(int timerId) {
-    if (activeTimers[timerId]) {
+    if (checkActiveTimer(timerId)) {
         timerArray[timerId] = getTime();
     }
 }
