@@ -26,7 +26,6 @@ class TimeManager {
     static const uint16_t ALARM_AMOUNT = 5;
     std::array<RTCTime, ALARM_AMOUNT> alarmArray = {{getTime()}};
     std::array<bool, ALARM_AMOUNT> activeAlarms = {{false}};
-    bool alarmRunning = false;
 
     static const uint16_t TIMER_AMOUNT = 5;
     std::array<RTCTime, TIMER_AMOUNT> timerArray = {{getTime()}};
