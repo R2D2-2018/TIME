@@ -25,17 +25,25 @@ enum class TimeManagerStates {
 namespace Time {
 class StateMachine {
   private:
+    ///< TimeManagerStates object that keeps track of the current state, initialised at MAIN_MENU
     TimeManagerStates timeMngrState = TimeManagerStates::MAIN_MENU;
+    ///< TimeManagerStates object that keeps track of the previous state, initialised at MAIN_MENU
     TimeManagerStates previousState = TimeManagerStates::MAIN_MENU;
 
+    ///< Char variable that stores user input at various points
     char someInput = '\0';
 
+    ///< Reference to TimeManager Object clock, which is the instantiation of the RTC module
     Time::TimeManager &clock;
 
+    ///< Temporary RTCTime object, initialised at 0:0 0/1/18, used to store temporary time profiles during alarm and system time
+    ///< settings
     Time::RTCTime temp = {0, 0, 0, 0, 0, 1, 18};
 
+    ///< Counter that keeps track of the selecter timer
     uint16_t timerCounter = 0;
 
+    ///< Counter that keeps track of the selected alarm
     uint16_t alarmCounter = 0;
 
   public:
