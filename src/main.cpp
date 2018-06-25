@@ -9,6 +9,7 @@
 #include "wrap-hwlib.hpp"
 
 #include "rtc_time.hpp"
+#include "state_machine.hpp"
 #include "time_manager.hpp"
 
 int main() {
@@ -21,41 +22,39 @@ int main() {
 
     auto clock = Time::TimeManager(scl, sda);
 
-    auto timersSize = clock.getTimerArraySize();
-    uint16_t timerCounter = 0;
+    Time::StateMachine STM(clock);
 
-    char someInput;
     while (true) {
-        hwlib::cin >> someInput;
-        if (someInput == 'q') {
-            clock.setTimer(timerCounter);
-        }
-        if (someInput == 'w') {
-            clock.resetTimer(timerCounter);
-        }
-        if (someInput == 'e') {
-            clock.clearTimer(timerCounter);
-        }
+        switch (STM.getState()) {
 
-        if (someInput == 'o') {
-            if (timerCounter > 0) {
-                timerCounter--;
-            }
-            hwlib::cout << timerCounter + 1 << hwlib::endl;
-        }
-        if (someInput == 'p') {
-            if (timerCounter < 4) {
-                timerCounter++;
-            }
-            hwlib::cout << timerCounter + 1 << hwlib::endl;
-        }
+        case TimeManagerStates::MAIN_MENU:
+            STM.mainMenu();
+            break;
 
-        hwlib::cout << "Current second count is: \t" << clock.getTime().getTotalSeconds() << hwlib::endl;
+        case TimeManagerStates::SET_TIME:
+            STM.setTime();
+            break;
 
-        for (uint16_t i = 0; i < timersSize; i++) {
-            hwlib::cout << (clock.elapsedTime(i).getTotalSeconds()) << '\t';
+        case TimeManagerStates::TIMER_SELECT:
+            STM.timerSelect();
+            break;
+
+        case TimeManagerStates::ALARM_SELECT:
+            STM.alarmSelect();
+            break;
+
+        case TimeManagerStates::TIMER:
+            STM.timerMenu();
+            break;
+
+        case TimeManagerStates::ALARM:
+            STM.alarmMenu();
+            break;
+
+        case TimeManagerStates::SET_ALARM:
+            STM.setTime();
+            break;
         }
-        hwlib::cout << hwlib::endl;
     }
     return 0;
 }

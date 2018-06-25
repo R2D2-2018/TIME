@@ -12,7 +12,7 @@
 namespace Time {
 TimeManager::TimeManager(hwlib::pin_oc &scl, hwlib::pin_oc &sda)
     : scl(scl), sda(sda), realTimeClock(hwlib::i2c_bus_bit_banged_scl_sda(scl, sda)) {
-    setTime(0);
+    TimeManager::setTime(RTCTime(0));
 }
 
 RTCTime TimeManager::getTime() {
@@ -29,6 +29,7 @@ RTCTime TimeManager::getTime() {
 }
 
 void TimeManager::setTime(RTCTime timeAndDate) {
+
     uint8_t data[] = {0,
                       decToBCD(timeAndDate.getSeconds()),
                       decToBCD(timeAndDate.getMinutes()),
@@ -41,16 +42,31 @@ void TimeManager::setTime(RTCTime timeAndDate) {
 }
 
 void TimeManager::setAlarm(int alarmId, RTCTime newAlarm) {
-    alarm = newAlarm;
-    alarmRunning = true;
+    alarmArray[alarmId] = newAlarm;
+    activeAlarms[alarmId] = true;
 }
 
 void TimeManager::clearAlarm(int alarmId) {
-    alarmRunning = false;
+    activeAlarms[alarmId] = false;
+}
+
+uint16_t TimeManager::getAlarmArraySize() {
+    return ALARM_AMOUNT;
+}
+
+bool TimeManager::checkAlarm(int alarmId) {
+    if (checkActiveAlarm(alarmId)) {
+        if (alarmArray[alarmId] <= getTime()) {
+            hwlib::cout << "BEEP BEEP" << hwlib::endl;
+            return true;
+        }
+        return false;
+    }
+    return false;
 }
 
 void TimeManager::setTimer(int timerId) {
-    if (!activeTimers[timerId]) {
+    if (!checkActiveTimer(timerId)) {
         timerArray[timerId] = getTime();
         activeTimers[timerId] = true;
     }
@@ -61,14 +77,14 @@ uint16_t TimeManager::getTimerArraySize() const {
 }
 
 RTCTime TimeManager::elapsedTime(int timerId) {
-    if (activeTimers[timerId]) {
+    if (checkActiveTimer(timerId)) {
         return (getTime() - timerArray[timerId]);
     }
     return RTCTime();
 }
 
 void TimeManager::resetTimer(int timerId) {
-    if (activeTimers[timerId]) {
+    if (checkActiveTimer(timerId)) {
         timerArray[timerId] = getTime();
     }
 }
@@ -80,5 +96,13 @@ void TimeManager::clearTimer(int timerId) {
 
 void TimeManager::stopTimer(int timerId) {
     activeTimers[timerId] = false;
+}
+
+bool TimeManager::checkActiveTimer(int timerId) {
+    return activeTimers[timerId];
+}
+
+bool TimeManager::checkActiveAlarm(int alarmId) {
+    return activeTimers[alarmId];
 }
 } // namespace Time
